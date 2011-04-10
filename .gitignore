@@ -1,0 +1,6 @@
+loaddefs.el*
+backups/*
+custom.el
+*elc
+.DS_Store
+\#*

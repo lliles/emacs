@@ -8,7 +8,7 @@
   (add-to-list 'package-archives source t))
 (package-initialize)
 
-(defvar install-packages (list 'idle-highlight
+(defvar lliles-packages (list 'idle-highlight
                                'ruby-mode
                                'inf-ruby
                                'css-mode
@@ -18,9 +18,9 @@
   "packages that should be installed")
 
 (defun lliles-install-packages ()
-  "Install all packages in install-packages that aren't installed."
+  "Install all packages in lliles-packages that aren't installed."
   (interactive)
-  (dolist (package install-packages)
+  (dolist (package lliles-packages)
     (unless (or (member package package-activated-list)
                 (functionp package))
       (message "Installing %s" (symbol-name package))
@@ -28,5 +28,5 @@
 
 ;; check that packages are installed
 (unless package-archive-contents (package-refresh-contents))
-(install-packages)
+(lliles-install-packages)
 

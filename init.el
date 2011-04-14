@@ -9,7 +9,11 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/vendor"))
 
-;; custom code
-(load "lliles/settings.el")
-(load "lliles/package.el")
+(load "custom/settings.el")
+(load "custom/package.el")
+(load "custom/defuns.el")
+(load "custom/bindings.el")
+(load "custom/registers.el")
+(load "custom/lisp.el")
+(load "custom/js.el")
 

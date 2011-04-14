@@ -9,8 +9,12 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "/vendor"))
 
+;; vendor function for loading vendor libs and customizations
+(load "custom/vendor.el")
+
+(vendor "package")
+
 (load "custom/settings.el")
-(load "custom/package.el")
 (load "custom/defuns.el")
 (load "custom/bindings.el")
 (load "custom/registers.el")

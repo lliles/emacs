@@ -12,7 +12,7 @@
 ;; vendor function for loading vendor libs and customizations
 (load "custom/vendor.el")
 
-(vendor "package")
+(vendor 'package)
 
 (load "custom/settings.el")
 (load "custom/defuns.el")

@@ -14,7 +14,8 @@
                                'css-mode
                                'find-file-in-project
                                'magit
-                               'gist)
+                               'gist
+                               'paredit)
   "packages that should be installed")
 
 (defun lliles-install-packages ()

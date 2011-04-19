@@ -217,10 +217,7 @@ not be shown with all themes but yours."
   :type '(repeat string)
   :group 'color-theme)
 
-(defcustom color-theme-libraries (directory-files 
-                                  (concat 
-                                   (file-name-directory (locate-library "color-theme"))
-                                   "/themes") t "^color-theme")
+(defcustom color-theme-libraries nil
   "A list of files, which will be loaded in color-theme-initialize depending
 on `color-theme-load-all-themes' value. 
 This allows a user to prune the default color-themes (which can take a while
@@ -228,7 +225,7 @@ to load)."
   :type '(repeat string)
   :group 'color-theme)
 
-(defcustom color-theme-load-all-themes t
+(defcustom color-theme-load-all-themes nil
   "When t, load all color-theme theme files
 as presented by `color-theme-libraries'. Else
 do not load any of this themes."

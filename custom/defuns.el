@@ -2,7 +2,6 @@
 (require 'imenu)
 
 ;; Network
-
 (defun view-url ()
   "Open a new buffer containing the contents of URL."
   (interactive)
@@ -15,7 +14,6 @@
           ((search-forward "<html" nil t) (html-mode)))))
 
 ;; Buffer-related
-
 (defun ido-imenu ()
   "Update the imenu index and then use ido to select a symbol to navigate to.
 Symbols matching the text at point are put first in the completion list."
@@ -124,7 +122,6 @@ Symbols matching the text at point are put first in the completion list."
       (find-file file))))
 
 ;; Cosmetic
-
 (defun pretty-lambdas ()
   (font-lock-add-keywords
    nil `(("(?\\(lambda\\>\\)"
@@ -133,7 +130,6 @@ Symbols matching the text at point are put first in the completion list."
                     nil))))))
 
 ;; Other
-
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."
   (interactive)
@@ -220,8 +216,50 @@ Symbols matching the text at point are put first in the completion list."
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
                          '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 
-
 ;; A monkeypatch to cause annotate to ignore whitespace
 (defun vc-git-annotate-command (file buf &optional rev)
   (let ((name (file-relative-name file)))
     (vc-git-command buf 0 name "blame" "-w" rev)))
+
+;; custom functions
+(defun longest-line-length ()
+  "Returns the length of the longest line in the current buffer.
+If called interactively, a message is printed in the echo area,
+otherwise just the length is returned."
+  (interactive)
+  (let (longest-line)
+    (save-excursion
+      (goto-char (point-min))
+      (end-of-line)
+      (setq longest-line (current-column))
+      (while (< (forward-line 1) 1)
+        (end-of-line)
+        (if (> (current-column) longest-line)
+            (setq longest-line (current-column))))
+      (if (called-interactively-p)
+          (message "Longest line length: %d" longest-line)))
+    longest-line))
+
+(defun mark-buffer-as-rectangle ()
+  "Puts mark at beginning of current buffer and moves point
+to the last line and column needed to capture all lines in 
+the buffer as a rectangle. Appends spaces to the last line
+as needed to match the length of the longest line."
+  (interactive)
+  (let ((longest-line (longest-line-length)))
+    (goto-char (point-min))
+    (push-mark)
+    (goto-char (point-max))
+    (while (< (current-column) (+ longest-line 1))
+      (insert " "))))
+
+;; TODO
+(defun kill-rectangle-save ()
+  "Save the rectangle as if killed with kill-rectangle, but
+don't delete it.")
+
+(defun align-repeat (start end regexp)
+  "Repeat alignment with respect to the given regular expression."
+    (interactive "r\nsAlign regexp: ")
+    (align-regexp start end 
+        (concat "\\(\\s-*\\)" regexp) 1 1 t))

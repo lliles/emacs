@@ -9,9 +9,6 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "vendor"))
 
-;; vendor function for loading vendor libs and customizations
-(load "custom/vendor.el")
-
 ;; packages to load via elpa/marmalade (see custom/package.el)
 (defvar lliles-packages (list 'idle-highlight
                               'ruby-mode
@@ -25,9 +22,12 @@
                               'http-twiddle
                               'ruby-electric))
 
-;; loads vendor package from vendor/ and init/customizations from
-;; custom/
+;; vendor function for loading vendor libs and customizations
+(load "custom/vendor.el")
+
+;; load vendor lib from vendor/ and customizations from custom/
 (vendor 'package)
+(vendor 'color-theme)
 (vendor 'espresso)
 (vendor 'extraedit)
 (vendor 'javadoc-help)
@@ -35,6 +35,7 @@
 (vendor 'ri)
 (vendor 'save-frame-geometry)
 
+;; load custom code
 (load "custom/settings.el")
 (load "custom/defuns.el")
 (load "custom/bindings.el")
@@ -42,3 +43,4 @@
 (load "custom/lisp.el")
 (load "custom/js.el")
 (load "custom/hybris.el")
+(load "custom/flyspell.el")

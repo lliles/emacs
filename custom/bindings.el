@@ -1,5 +1,5 @@
 ;; You know, like Readline.
-(global-set-key (kbd "C-M-h") 'backward-kill-word)
+ (global-set-key (kbd "C-M-h") 'backward-kill-word)
 
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
@@ -86,4 +86,22 @@
 ;; Org
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+
+;; swap command/options keys in mac os x
+(when (eq system-type 'darwin) 
+  (setq mac-option-key-is-meta nil)
+  (setq mac-command-key-is-meta t)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil))
+
+;; put commands right at your fingertips!
+(defalias 'rr 'replace-regexp)
+(defalias 'qrr 'query-replace-regexp)
+(defalias 'ttl 'toggle-truncate-lines)
+
+;; remap C-w to backward-kill-word
+;(global-set-key "\C-w" 'backward-kill-word)
+;; and consequently remap C-x C-k to kill-region since we clobbered
+;; that with backward-kill-word
+;(global-set-key "\C-x\C-k" 'kill-region)
 

@@ -17,6 +17,7 @@
 (ansi-color-for-comint-mode-on)
 
 (setq visible-bell nil
+      column-number-mode t 
       fringe-mode (cons 4 0)
       echo-keystrokes 0.1
       font-lock-maximum-decoration t
@@ -33,16 +34,24 @@
                                   indentation space-after-tab)
       whitespace-line-column 100
       ediff-window-setup-function 'ediff-setup-windows-plain
-      oddmuse-directory (concat dotfiles-dir "oddmuse")
       xterm-mouse-mode t
-      save-place-file (concat dotfiles-dir "places"))
+      save-place-file (concat dotfiles-dir "places")
+      org-log-done t
+      initial-scratch-message ""
+      ;; set mysql client output to vertical instead of table
+      sql-mysql-options (list "-E")
+      ;; don't wrap lines in partial width windows
+      truncate-partial-width-windows t)
+
+;; don't wrap lines at all!
+(set-default 'truncate-lines t)
 
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
 ;; Set this to whatever browser you use
 ;; (setq browse-url-browser-function 'browse-url-firefox)
-;; (setq browse-url-browser-function 'browse-default-macosx-browser)
+(setq browse-url-browser-function 'browse-default-macosx-browser)
 ;; (setq browse-url-browser-function 'browse-default-windows-browser)
 ;; (setq browse-url-browser-function 'browse-default-kde)
 ;; (setq browse-url-browser-function 'browse-default-epiphany)
@@ -103,7 +112,6 @@
       rng-nxml-auto-validate-flag nil)
 
 ;; Associate modes with file extensions
-
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
@@ -122,7 +130,6 @@
       magit-diff-options "-w")
 
 ;; Cosmetics
-
 (set-face-background 'vertical-border "white")
 (set-face-foreground 'vertical-border "white")
 
@@ -138,11 +145,6 @@
      (when (not window-system)
        (set-face-background 'magit-item-highlight "white"))))
 
-(eval-after-load 'mumamo
-  '(eval-after-load 'zenburn
-     '(ignore-errors (set-face-background
-                      'mumamo-background-chunk-submode "gray22"))))
-
 ;; Platform-specific stuff
 (when (eq system-type 'darwin)
   ;; Work around a bug on OS X where system-name is FQDN
@@ -151,9 +153,5 @@
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)
 
-;; Get around the emacswiki spam protection
-(add-hook 'oddmuse-mode-hook
-          (lambda ()
-            (unless (string-match "question" oddmuse-post)
-              (setq oddmuse-post (concat "uihnscuskc=1;" oddmuse-post)))))
-
+;; allow narrowing
+(put 'narrow-to-region 'disabled nil)

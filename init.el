@@ -20,7 +20,10 @@
                               'paredit
                               'htmlize
                               'http-twiddle
-                              'ruby-electric))
+                              'ruby-electric
+                              'clojure-mode
+                              'clojure-test-mode
+                              'durendal))
 
 ;; vendor function for loading vendor libs and customizations
 (load "custom/vendor.el")

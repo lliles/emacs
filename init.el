@@ -12,7 +12,25 @@
 ;; vendor function for loading vendor libs and customizations
 (load "custom/vendor.el")
 
+;; packages to load via elpa/marmalade (see custom/package.el)
+(defvar lliles-packages (list 'idle-highlight
+                              'ruby-mode
+                              'inf-ruby
+                              'css-mode
+                              'find-file-in-project
+                              'magit
+                              'gist
+                              'paredit
+                              'htmlize
+                              'http-twiddle
+                              'ruby-electric))
+
+;; loads vendor package from vendor/ and init/customizations from
+;; custom/
 (vendor 'package)
+(vendor 'espresso)
+(vendor 'javadoc-help)
+(vendor 'ri)
 
 (load "custom/settings.el")
 (load "custom/defuns.el")

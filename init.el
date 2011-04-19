@@ -3,7 +3,7 @@
 ;; and brighter; it simply makes everything else vanish."
 ;; -Neal Stephenson, "In the Beginning was the Command Line"
 
-;; load path
+;; setup load path
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))
 (add-to-list 'load-path dotfiles-dir)
@@ -29,8 +29,11 @@
 ;; custom/
 (vendor 'package)
 (vendor 'espresso)
+(vendor 'extraedit)
 (vendor 'javadoc-help)
+(vendor 'misc-cmds)
 (vendor 'ri)
+(vendor 'save-frame-geometry)
 
 (load "custom/settings.el")
 (load "custom/defuns.el")
@@ -38,4 +41,4 @@
 (load "custom/registers.el")
 (load "custom/lisp.el")
 (load "custom/js.el")
-
+(load "custom/hybris.el")

@@ -23,6 +23,7 @@
                               'ruby-electric
                               'clojure-mode
                               'clojure-test-mode
+                              'slime
                               'durendal))
 
 ;; vendor function for loading vendor libs and customizations

@@ -24,6 +24,7 @@
                               'clojure-mode
                               'clojure-test-mode
                               'slime
+                              'slime-repl
                               'durendal))
 
 ;; vendor function for loading vendor libs and customizations
@@ -48,3 +49,7 @@
 (load "custom/js.el")
 (load "custom/hybris.el")
 (load "custom/flyspell.el")
+
+;; load system specific code
+(load (concat dotfiles-dir "custom/" system-name ".el") 'noerror)
+

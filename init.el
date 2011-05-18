@@ -21,10 +21,10 @@
                               'htmlize
                               'http-twiddle
                               'ruby-electric
-                              'clojure-mode
-                              'clojure-test-mode
                               'slime
                               'slime-repl
+                              'clojure-mode
+                              'clojure-test-mode
                               'durendal))
 
 ;; vendor function for loading vendor libs and customizations

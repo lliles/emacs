@@ -5,3 +5,4 @@ custom.el
 *elc
 .DS_Store
 \#*
+tramp

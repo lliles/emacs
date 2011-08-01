@@ -256,10 +256,25 @@ as needed to match the length of the longest line."
 ;; TODO
 (defun kill-rectangle-save ()
   "Save the rectangle as if killed with kill-rectangle, but
-don't delete it.")
+don't delete it."
+  (message "Implement me!!"))
 
 (defun align-repeat (start end regexp)
   "Repeat alignment with respect to the given regular expression."
     (interactive "r\nsAlign regexp: ")
     (align-regexp start end 
         (concat "\\(\\s-*\\)" regexp) 1 1 t))
+
+(defun unfill-paragraph ()
+  "This command does the reverse of `fill-paragraph' by setting
+fill-column to a really large number then calling `fill-paragraph'."
+  (interactive)
+  (let ((fill-column 90000000))
+    (fill-paragraph nil)))
+
+(defun unfill-region (start end)
+  "This command does the reverse of `fill-region' by setting
+fill-column to a really large number then calling `fill-region'."
+  (interactive "r")
+  (let ((fill-column 90000000))
+    (fill-region start end)))

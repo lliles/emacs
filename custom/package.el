@@ -1,11 +1,12 @@
 (require 'cl)
 
-;; setup ELPA (this will be part of emacs 24)
-(setq package-user-dir (concat dotfiles-dir "elpa"))
+;; package setup
+(setq package-user-dir (concat dotfiles-dir "packages"))
 (require 'package)
-(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                  ("elpa" . "http://tromey.com/elpa/")))
-  (add-to-list 'package-archives source t))
+(dolist 
+  (sources '(("marmalade" . "http://marmalade-repo.org/packages/")
+             ("elpa"      . "http://tromey.com/elpa/")))
+  (add-to-list 'package-archives sources t))
 (package-initialize)
 
 (defun lliles-install-packages ()
@@ -17,7 +18,5 @@
       (message "Installing %s" (symbol-name package))
       (package-install package))))
 
-;; check that packages are installed
 (unless package-archive-contents (package-refresh-contents))
 (lliles-install-packages)
-

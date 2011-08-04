@@ -27,11 +27,13 @@
                               'clojure-test-mode
                               'durendal))
 
+;; install packages
+(load "custom/package.el")
+
 ;; vendor function for loading vendor libs and customizations
 (load "custom/vendor.el")
 
 ;; load vendor lib from vendor/ and customizations from custom/
-(vendor 'package)
 (vendor 'color-theme)
 (vendor 'espresso)
 (vendor 'extraedit)

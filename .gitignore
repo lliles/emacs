@@ -6,3 +6,4 @@ custom.el
 .DS_Store
 \#*
 tramp
+url/*

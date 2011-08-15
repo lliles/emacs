@@ -7,7 +7,10 @@
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1))
+  (blink-cursor-mode -1)
+  (when (eq system-type 'darwin)
+    (set-default-font "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+    (setq mouse-wheel-scroll-amount '(0.01))))
 
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
 

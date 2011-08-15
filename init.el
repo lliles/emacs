@@ -55,3 +55,5 @@
 ;; load system specific code
 (load (concat dotfiles-dir "custom/" system-name ".el") 'noerror)
 
+;; use this instance as a server
+(server-start)

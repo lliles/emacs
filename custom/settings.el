@@ -7,10 +7,7 @@
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (mouse-wheel-mode t)
-  (blink-cursor-mode -1)
-  (when (eq system-type 'darwin)
-    (set-default-font "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
-    (setq mouse-wheel-scroll-amount '(0.01))))
+  (blink-cursor-mode -1))
 
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
 
@@ -44,7 +41,9 @@
       ;; set mysql client output to vertical instead of table
       sql-mysql-options (list "-E")
       ;; don't wrap lines in partial width windows
-      truncate-partial-width-windows t)
+      truncate-partial-width-windows t
+      ;; don't pop a new frame for open file
+      ns-pop-up-frames nil)
 
 ;; don't wrap lines at all!
 (set-default 'truncate-lines t)
@@ -151,7 +150,9 @@
 ;; Platform-specific stuff
 (when (eq system-type 'darwin)
   ;; Work around a bug on OS X where system-name is FQDN
-  (setq system-name (car (split-string system-name "\\."))))
+  (setq system-name (car (split-string system-name "\\.")))
+  (set-default-font "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+  (setq mouse-wheel-scroll-amount '(0.01)))
 
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)

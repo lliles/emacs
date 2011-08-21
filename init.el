@@ -28,7 +28,8 @@
                               'slime-repl
                               'clojure-mode
                               'clojure-test-mode
-                              'durendal))
+                              'durendal
+                              'scala-mode))
 
 ;; install packages
 (load "custom/package.el")

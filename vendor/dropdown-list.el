@@ -62,11 +62,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defface dropdown-list-face
-  '((t :inherit default :background "lightyellow" :foreground "black"))
+  '((t :inherit 'mode-line-inactive))
   "*Bla." :group 'dropdown-list)
 
 (defface dropdown-list-selection-face
-  '((t :inherit dropdown-list-face :background "purple"))
+  '((t :inherit 'mode-line))
   "*Bla." :group 'dropdown-list)
 
 (defvar dropdown-list-overlays nil)

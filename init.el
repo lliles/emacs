@@ -9,6 +9,9 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path (concat dotfiles-dir "vendor"))
 
+;; load themes early to avoid face snatching
+(load "custom/themes.el")
+
 ;; packages to load via elpa/marmalade (see custom/package.el)
 (defvar lliles-packages (list 'idle-highlight
                               'ruby-mode
@@ -34,13 +37,14 @@
 (load "custom/vendor.el")
 
 ;; load vendor lib from vendor/ and customizations from custom/
-(vendor 'color-theme)
 (vendor 'espresso)
 (vendor 'extraedit)
 (vendor 'javadoc-help)
 (vendor 'misc-cmds)
 (vendor 'ri)
 (vendor 'save-frame-geometry)
+(vendor 'yasnippet)
+(vendor 'rainbow-mode)
 
 ;; load custom code
 (load "custom/settings.el")

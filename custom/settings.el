@@ -17,6 +17,7 @@
 (ansi-color-for-comint-mode-on)
 
 (setq visible-bell nil
+      ring-bell-function (lambda ()) ;; nil still rings, so empty function instead
       column-number-mode t 
       fringe-mode (cons 4 0)
       echo-keystrokes 0.1

@@ -17,7 +17,7 @@
 (ansi-color-for-comint-mode-on)
 
 (setq visible-bell nil
-      ring-bell-function (lambda ()) ;; nil still rings, so empty function instead
+      ring-bell-function (lambda ()) ;; nil still rings, so no-op instead
       column-number-mode t 
       fringe-mode (cons 4 0)
       echo-keystrokes 0.1
@@ -152,7 +152,8 @@
 (when (eq system-type 'darwin)
   ;; Work around a bug on OS X where system-name is FQDN
   (setq system-name (car (split-string system-name "\\.")))
-  (set-default-font "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+  (set-default-font
+   "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
   (setq mouse-wheel-scroll-amount '(0.01)))
 
 ;; make emacs use the clipboard

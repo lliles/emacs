@@ -1,7 +1,7 @@
 (require 'yasnippet)
 (yas/initialize)
 
-(setq yas/root-directory (concat dotfiles-dir "snippets"))
+(setq yas/root-directory (concat user-emacs-directory "snippets"))
 (yas/load-directory yas/root-directory)
 
 (require 'dropdown-list)

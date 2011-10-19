@@ -1,7 +1,7 @@
 (require 'cl)
 
 ;; package setup
-(setq package-user-dir (concat dotfiles-dir "packages"))
+(setq package-user-dir (concat user-emacs-directory "packages"))
 (require 'package)
 (dolist 
   (sources '(("marmalade" . "http://marmalade-repo.org/packages/")

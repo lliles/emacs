@@ -1,8 +1,8 @@
 (defun vendor (library)
   (let* ((file (symbol-name library))
-         (normal (concat dotfiles-dir "vendor/" file))
+         (normal (concat user-emacs-directory "vendor/" file))
          (suffix (concat normal ".el"))
-         (custom (concat dotfiles-dir "custom/" file ".el")))
+         (custom (concat user-emacs-directory "custom/" file ".el")))
     (cond
      ((file-directory-p normal) (add-to-list 'load-path normal) (require library))
      ((file-directory-p suffix) (add-to-list 'load-path suffix) (require library))

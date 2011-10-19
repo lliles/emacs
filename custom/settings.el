@@ -36,7 +36,7 @@
       whitespace-line-column 100
       ediff-window-setup-function 'ediff-setup-windows-plain
       xterm-mouse-mode t
-      save-place-file (concat dotfiles-dir "places")
+      save-place-file (concat user-emacs-directory "places")
       org-log-done t
       initial-scratch-message ""
       ;; set mysql client output to vertical instead of table
@@ -106,13 +106,7 @@
 
 ;; Don't clutter up directories with files~
 (setq backup-directory-alist `(("." . ,(expand-file-name
-                                        (concat dotfiles-dir "backups")))))
-
-;; nxhtml stuff
-(setq mumamo-chunk-coloring 'submode-colored
-      nxhtml-skip-welcome t
-      indent-region-mode t
-      rng-nxml-auto-validate-flag nil)
+                                        (concat user-emacs-directory "backups")))))
 
 ;; Associate modes with file extensions
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
@@ -120,7 +114,7 @@
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\(on\\)?$" . js2-mode))
+;(add-to-list 'auto-mode-alist '("\\.js\\(on\\)?$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
 
 (eval-after-load 'grep

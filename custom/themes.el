@@ -1,5 +1,5 @@
-(add-to-list 'load-path (concat dotfiles-dir "themes"))
-(add-to-list 'custom-theme-load-path (concat dotfiles-dir "themes"))
+(add-to-list 'load-path (concat user-emacs-directory "themes"))
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 
 ;; solarized
 ;(let ((solarized-italic nil)

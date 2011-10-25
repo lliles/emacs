@@ -27,7 +27,9 @@
                               'clojure-mode
                               'clojure-test-mode
                               'durendal
-                              'scala-mode))
+                              'scala-mode
+                              'smex
+                              'ido-ubiquitous))
 
 ;; install packages
 (load "custom/package.el")
@@ -52,7 +54,8 @@
 (load "custom/lisp.el")
 (load "custom/js.el")
 (load "custom/hybris.el")
-;(load "custom/flyspell.el")
+;;(load "custom/flyspell.el")
+(load "custom/smex.el")
 
 ;; load system specific code
 (load (concat "custom/" system-name ".el") 'noerror)

@@ -25,14 +25,14 @@
       inhibit-startup-message t
       transient-mark-mode t
       color-theme-is-global t
+      sentence-end-double-space nil
       shift-select-mode nil
       mouse-yank-at-point t
       require-final-newline t
       truncate-partial-width-windows nil
       uniquify-buffer-name-style 'forward
       ffap-machine-p-known 'reject
-      whitespace-style '(trailing lines space-before-tab
-                                  indentation space-after-tab)
+      whitespace-style '(face trailing lines-tail tabs)
       whitespace-line-column 100
       ediff-window-setup-function 'ediff-setup-windows-plain
       xterm-mouse-mode t
@@ -65,9 +65,6 @@
 ;; Transparently open compressed files
 (auto-compression-mode t)
 
-;; Enable syntax highlighting for older Emacsen that have it off
-(global-font-lock-mode t)
-
 ;; Save a list of recent files visited.
 (recentf-mode 1)
 
@@ -75,13 +72,16 @@
 (show-paren-mode 1)
 
 ;; ido-mode is like magic pixie dust!
-(when (> emacs-major-version 21)
-  (ido-mode t)
-  (setq ido-enable-prefix nil
-        ido-enable-flex-matching t
-        ido-create-new-buffer 'always
-        ido-use-filename-at-point 'guess
-        ido-max-prospects 10))
+(ido-mode t)
+(ido-ubiquitous t)
+(setq ido-enable-prefix nil
+      ido-enable-flex-matching t
+      ido-auto-merge-work-directories-length nil
+      ido-create-new-buffer 'always
+      ido-use-filename-at-point 'guess
+      ido-use-virtual-buffers t
+      ido-handle-duplicate-virtual-buffers 2
+      ido-max-prospects 10)
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
@@ -99,10 +99,11 @@
 (defalias 'auto-revert-tail-mode 'tail-mode)
 
 ;; Hippie expand: at times perhaps too hip
-(delete 'try-expand-line hippie-expand-try-functions-list)
-(delete 'try-expand-list hippie-expand-try-functions-list)
-(delete 'try-complete-file-name-partially hippie-expand-try-functions-list)
-(delete 'try-complete-file-name hippie-expand-try-functions-list)
+(dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+  (delete f hippie-expand-try-functions-list))
+
+;; Add this back in at the end of the list.
+(add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)
 
 ;; Don't clutter up directories with files~
 (setq backup-directory-alist `(("." . ,(expand-file-name
@@ -127,9 +128,6 @@
       magit-diff-options "-w")
 
 ;; Cosmetics
-(set-face-background 'vertical-border "white")
-(set-face-foreground 'vertical-border "white")
-
 (eval-after-load 'diff-mode
   '(progn
      (set-face-foreground 'diff-added "green4")
@@ -137,10 +135,8 @@
 
 (eval-after-load 'magit
   '(progn
-     (set-face-foreground 'magit-diff-add "green3")
-     (set-face-foreground 'magit-diff-del "red3")
-     (when (not window-system)
-       (set-face-background 'magit-item-highlight "white"))))
+     (set-face-foreground 'magit-diff-add "green4")
+     (set-face-foreground 'magit-diff-del "red3")))
 
 ;; Platform-specific stuff
 (when (eq system-type 'darwin)

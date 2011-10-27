@@ -7,3 +7,5 @@ custom.el
 \#*
 tramp
 url/*
+.smex-items
+places

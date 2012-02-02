@@ -45,6 +45,7 @@
 (vendor 'save-frame-geometry)
 (vendor 'yasnippet)
 (vendor 'rainbow-mode)
+(vendor 'mustache-mode)
 
 ;; load custom code
 (load "custom/settings.el")

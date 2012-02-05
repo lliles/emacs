@@ -14,7 +14,6 @@
 (defvar lliles-packages (list 'idle-highlight-mode
                               'ruby-mode
                               'inf-ruby
-                              'css-mode
                               'find-file-in-project
                               'magit
                               'gist

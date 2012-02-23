@@ -150,6 +150,3 @@
 
 ;; allow narrowing
 (put 'narrow-to-region 'disabled nil)
-
-;; enable durendal
-(durendal-enable)

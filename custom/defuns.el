@@ -172,3 +172,17 @@ fill-column to a really large number then calling `fill-region'."
   (interactive "r")
   (let ((fill-column 90000000))
     (fill-region start end)))
+
+(defun refill-paragraphs-to-be-one-line ()
+  "fill individual paragraphs with large fill column"
+  (interactive)
+  (let ((fill-column 100000))
+    (fill-individual-paragraphs (point-min) (point-max))))
+
+(defun org-to-confluence ()
+  "change stars to headings and refill paragraphs"
+  (interactive)
+  (replace-regexp "\\*\\*\\*" "h4." nil (point-min) (point-max))
+  (replace-regexp "\\*\\*" "h3." nil (point-min) (point-max))
+  (replace-regexp "\\*" "h2." nil (point-min) (point-max))
+  (refill-paragraphs-to-be-one-line))

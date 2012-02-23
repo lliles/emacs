@@ -25,7 +25,6 @@
                               'slime-repl
                               'clojure-mode
                               'clojure-test-mode
-                              'durendal
                               'scala-mode
                               'smex
                               'ido-ubiquitous))

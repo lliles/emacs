@@ -8,7 +8,7 @@
 (add-to-list 'load-path (concat user-emacs-directory "vendor"))
 
 ;; load themes early to avoid face snatching
-(load "custom/themes.el")
+(load "custom/themes")
 
 ;; packages to load via elpa/marmalade (see custom/package.el)
 (defvar lliles-packages (list 'idle-highlight-mode
@@ -30,10 +30,10 @@
                               'ido-ubiquitous))
 
 ;; install packages
-(load "custom/package.el")
+(load "custom/package")
 
 ;; vendor function for loading vendor libs and customizations
-(load "custom/vendor.el")
+(load "custom/vendor")
 
 ;; load vendor lib from vendor/ and customizations from custom/
 (vendor 'extraedit)
@@ -46,18 +46,18 @@
 (vendor 'mustache-mode)
 
 ;; load custom code
-(load "custom/settings.el")
-(load "custom/defuns.el")
-(load "custom/bindings.el")
-(load "custom/registers.el")
-(load "custom/lisp.el")
-(load "custom/js.el")
-(load "custom/hybris.el")
-;;(load "custom/flyspell.el")
-(load "custom/smex.el")
+(load "custom/settings")
+(load "custom/defuns")
+(load "custom/bindings")
+(load "custom/registers")
+(load "custom/lisp")
+(load "custom/js")
+(load "custom/hybris")
+;;(load "custom/flyspell")
+(load "custom/smex")
 
 ;; load system specific code
-(load (concat "custom/" system-name ".el") 'noerror)
+(load (concat "custom/" system-name) 'noerror)
 
 ;; use this instance as a server
 (server-start)

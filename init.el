@@ -24,6 +24,7 @@
                               'slime-repl
                               'clojure-mode
                               'clojure-test-mode
+                              'durendal
                               'scala-mode
                               'smex
                               'ido-ubiquitous
@@ -53,6 +54,7 @@
 (load "custom/hybris")
 ;;(load "custom/flyspell")
 (load "custom/smex")
+(load "custom/durendal")
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)

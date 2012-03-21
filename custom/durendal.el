@@ -1,0 +1,2 @@
+(require 'durendal)
+(durendal-enable)

@@ -27,7 +27,9 @@
                               'scala-mode
                               'smex
                               'ido-ubiquitous
-			      'smooth-scroll))
+                              'smooth-scroll
+                              'javadoc-help
+                              'rainbow-mode))
 
 ;; install packages
 (load "custom/package")
@@ -35,12 +37,10 @@
 ;; load vendor lib from vendor/ and customizations from custom/
 (load "custom/vendor")
 (vendor 'extraedit)
-(vendor 'javadoc-help)
 (vendor 'misc-cmds)
 (vendor 'ri)
 (vendor 'save-frame-geometry)
 (vendor 'yasnippet)
-(vendor 'rainbow-mode)
 (vendor 'mustache-mode)
 
 ;; load custom code

@@ -1,5 +1,3 @@
-;;; These belong in coding-hook:
-
 ;; We have a number of turn-on-* functions since it's advised that lambda
 ;; functions not go in hooks. Repeatedly evaling an add-to-list with a
 ;; hook value will repeatedly add it since there's no way to ensure

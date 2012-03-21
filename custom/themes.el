@@ -1,4 +1,3 @@
-(add-to-list 'load-path (concat user-emacs-directory "themes"))
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
 
 ;; solarized

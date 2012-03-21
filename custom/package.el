@@ -1,12 +1,12 @@
 (require 'cl)
-
-;; package setup
-(setq package-user-dir (concat user-emacs-directory "packages"))
 (require 'package)
+(setq package-user-dir (concat user-emacs-directory "packages"))
+
+;; package sources
 (dolist 
-  (sources '(("marmalade" . "http://marmalade-repo.org/packages/")
-             ("elpa"      . "http://tromey.com/elpa/")))
-  (add-to-list 'package-archives sources t))
+  (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+            ("elpa"      . "http://tromey.com/elpa/")))
+  (add-to-list 'package-archives source t))
 (package-initialize)
 
 (defun lliles-install-packages ()

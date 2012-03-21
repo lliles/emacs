@@ -94,11 +94,6 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier nil))
 
-;; put commands right at your fingertips!
-(defalias 'rr 'replace-regexp)
-(defalias 'qrr 'query-replace-regexp)
-(defalias 'ttl 'toggle-truncate-lines)
-
 ;; remap C-w to backward-kill-word
 ;(global-set-key "\C-w" 'backward-kill-word)
 ;; and consequently remap C-x C-k to kill-region since we clobbered

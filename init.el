@@ -27,7 +27,6 @@
                               'scala-mode
                               'smex
                               'ido-ubiquitous
-                              'smooth-scroll
                               'javadoc-help
                               'rainbow-mode))
 
@@ -54,7 +53,6 @@
 (load "custom/hybris")
 ;;(load "custom/flyspell")
 (load "custom/smex")
-(load "custom/smooth-scroll")
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)

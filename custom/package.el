@@ -1,4 +1,3 @@
-(require 'cl)
 (require 'package)
 (setq package-user-dir (concat user-emacs-directory "packages"))
 
@@ -7,16 +6,15 @@
   (source '(("marmalade" . "http://marmalade-repo.org/packages/")
             ("elpa"      . "http://tromey.com/elpa/")))
   (add-to-list 'package-archives source t))
+
 (package-initialize)
 
-(defun lliles-install-packages ()
-  "Install all packages in lliles-packages that aren't installed."
-  (interactive)
-  (dolist (package lliles-packages)
-    (unless (or (member package package-activated-list)
-                (functionp package))
-      (message "Installing %s" (symbol-name package))
-      (package-install package))))
+(when (not package-archive-contents)
+  (package-refresh-contents))
 
-(unless package-archive-contents (package-refresh-contents))
-(lliles-install-packages)
+(dolist (package package-install-list)
+  (let ((custom (concat user-emacs-directory "custom/" (symbol-name package))))
+    (when (not (package-installed-p package))
+      (package-install p))
+    (when (file-exists-p custom)
+      (load custom))))

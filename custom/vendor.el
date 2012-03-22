@@ -1,6 +1,6 @@
 (add-to-list 'load-path (concat user-emacs-directory "vendor"))
 
-(defun vendor (library)
+(dolist (library vendor-install-list)
   (let* ((file (symbol-name library))
          (normal (concat user-emacs-directory "vendor/" file))
          (suffix (concat normal ".el"))

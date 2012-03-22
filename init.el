@@ -10,38 +10,36 @@
 (load "custom/themes")
 
 ;; packages to load via elpa/marmalade (see custom/package.el)
-(defvar lliles-packages (list 'idle-highlight-mode
-                              'ruby-mode
-                              'inf-ruby
-                              'find-file-in-project
-                              'magit
-                              'gist
-                              'paredit
-                              'htmlize
-                              'http-twiddle
-                              'ruby-electric
-                              'slime
-                              'slime-repl
-                              'clojure-mode
-                              'clojure-test-mode
-                              'durendal
-                              'scala-mode
-                              'smex
-                              'ido-ubiquitous
-                              'javadoc-help
-                              'rainbow-mode))
-
-;; install packages
+(defvar package-install-list '(idle-highlight-mode
+                               ruby-mode
+                               inf-ruby
+                               find-file-in-project
+                               magit
+                               gist
+                               paredit
+                               htmlize
+                               http-twiddle
+                               ruby-electric
+                               slime
+                               slime-repl
+                               clojure-mode
+                               clojure-test-mode
+                               durendal
+                               scala-mode
+                               smex
+                               ido-ubiquitous
+                               javadoc-help
+                               rainbow-mode))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
+(defvar vendor-install-list '(extraedit
+                              misc-cmds
+                              ri
+                              save-frame-geometry
+                              yasnippet
+                              mustache-mode))
 (load "custom/vendor")
-(vendor 'extraedit)
-(vendor 'misc-cmds)
-(vendor 'ri)
-(vendor 'save-frame-geometry)
-(vendor 'yasnippet)
-(vendor 'mustache-mode)
 
 ;; load custom code
 (load "custom/settings")
@@ -53,8 +51,6 @@
 (load "custom/js")
 (load "custom/hybris")
 ;;(load "custom/flyspell")
-(load "custom/smex")
-(load "custom/durendal")
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)

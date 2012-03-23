@@ -15,6 +15,6 @@
 (dolist (package package-install-list)
   (let ((custom (concat user-emacs-directory "custom/" (symbol-name package))))
     (when (not (package-installed-p package))
-      (package-install p))
+      (package-install package))
     (when (file-exists-p custom)
       (load custom))))

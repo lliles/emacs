@@ -29,7 +29,8 @@
                                smex
                                ido-ubiquitous
                                javadoc-help
-                               rainbow-mode))
+                               rainbow-mode
+                               yaml-mode))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/

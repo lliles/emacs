@@ -1,0 +1,3 @@
+[submodule "themes/dark-laptop"]
+	path = themes/dark-laptop
+	url = git@github.com:lliles/dark-laptop.git

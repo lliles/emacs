@@ -39,6 +39,10 @@
       save-place-file (concat user-emacs-directory "places")
       org-log-done t
       initial-scratch-message ""
+      ;; scroll setting
+      scroll-margin 0
+      scroll-conservatively 101
+      scroll-preserve-screen-position
       ;; set mysql client output to vertical instead of table
       sql-mysql-options (list "-E")
       ;; don't wrap lines in partial width windows
@@ -134,6 +138,7 @@
   (setq system-name (car (split-string system-name "\\.")))
   (set-default-font
    "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
+  (set-face-attribute 'default nil :height 110)
   (setq mouse-wheel-scroll-amount '(0.01)))
 
 ;; make emacs use the clipboard

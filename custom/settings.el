@@ -42,7 +42,7 @@
       ;; scroll setting
       scroll-margin 0
       scroll-conservatively 101
-      scroll-preserve-screen-position
+      scroll-preserve-screen-position 1
       ;; set mysql client output to vertical instead of table
       sql-mysql-options (list "-E")
       ;; don't wrap lines in partial width windows

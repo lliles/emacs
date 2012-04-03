@@ -16,5 +16,4 @@
   (let ((custom (concat user-emacs-directory "custom/" (symbol-name package))))
     (when (not (package-installed-p package))
       (package-install package))
-    (when (file-exists-p custom)
-      (load custom))))
+    (load custom 'noerror)))

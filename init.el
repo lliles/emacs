@@ -30,7 +30,8 @@
                                ido-ubiquitous
                                javadoc-help
                                rainbow-mode
-                               yaml-mode))
+                               yaml-mode
+                               haskell-mode))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
@@ -58,3 +59,4 @@
 
 ;; use this instance as a server
 (server-start)
+

@@ -5,9 +5,10 @@
 ;  (load-theme 'solarized-dark t))
 
 ;; zenburn
-;(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
-;(load-theme 'zenburn t)
+(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes"))
+(load-theme 'zenburn t)
 
 ;; dark-laptop
-(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/dark-laptop"))
-(load-theme 'dark-laptop t)
+;(add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/dark-laptop"))
+;(load-theme 'dark-laptop t)
+

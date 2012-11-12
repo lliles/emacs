@@ -20,25 +20,23 @@
                                htmlize
                                http-twiddle
                                ruby-electric
-                               slime
-                               slime-repl
                                clojure-mode
-                               clojure-test-mode
-                               durendal
                                scala-mode
                                smex
                                ido-ubiquitous
                                javadoc-help
                                rainbow-mode
                                yaml-mode
-                               haskell-mode))
+                               haskell-mode
+                               nrepl
+                               ac-nrepl))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
 (defvar vendor-install-list '(extraedit
                               misc-cmds
                               ri
-                              save-frame-geometry
+;                              save-frame-geometry
                               yasnippet
                               mustache-mode))
 (load "custom/vendor")

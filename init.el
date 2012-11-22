@@ -36,7 +36,7 @@
 (defvar vendor-install-list '(extraedit
                               misc-cmds
                               ri
-;                              save-frame-geometry
+                              save-frame-geometry
                               yasnippet
                               mustache-mode))
 (load "custom/vendor")
@@ -50,6 +50,7 @@
 (load "custom/lisp")
 (load "custom/js")
 (load "custom/hybris")
+(load "custom/slime")
 ;;(load "custom/flyspell")
 
 ;; load system specific code

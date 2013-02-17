@@ -95,8 +95,8 @@
   (setq mac-option-modifier nil))
 
 ;; remap C-w to backward-kill-word
-;(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-w" 'backward-kill-word)
 ;; and consequently remap C-x C-k to kill-region since we clobbered
 ;; that with backward-kill-word
-;(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-x\C-k" 'kill-region)
 

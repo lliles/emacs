@@ -16,6 +16,7 @@
 (prefer-coding-system 'utf-8)
 (ansi-color-for-comint-mode-on)
 
+(require 'uniquify) ;; for setting uniquify option below
 (setq visible-bell nil
       ring-bell-function (lambda ()) ;; nil still rings, so no-op instead
       column-number-mode t 
@@ -24,14 +25,10 @@
       font-lock-maximum-decoration t
       inhibit-startup-message t
       transient-mark-mode t
-      color-theme-is-global t
-      sentence-end-double-space nil
       shift-select-mode nil
       mouse-yank-at-point t
       require-final-newline t
-      truncate-partial-width-windows nil
       uniquify-buffer-name-style 'forward
-      ffap-machine-p-known 'reject
       whitespace-style '(face trailing lines-tail tabs)
       whitespace-line-column 100
       ediff-window-setup-function 'ediff-setup-windows-plain
@@ -40,7 +37,7 @@
       org-log-done t
       initial-scratch-message ""
       ;; scroll setting
-      scroll-margin 0
+      scroll-margin 2
       scroll-conservatively 101
       scroll-preserve-screen-position 1
       ;; set mysql client output to vertical instead of table
@@ -57,8 +54,7 @@
 (add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
 
 ;; Set this to whatever browser you use
-;; (setq browse-url-browser-function 'browse-url-firefox)
-(setq browse-url-browser-function 'browse-default-macosx-browser)
+(setq browse-url-browser-function 'browse-url-default-macosx-browser)
 
 ;; Transparently open compressed files
 (auto-compression-mode t)
@@ -71,7 +67,7 @@
 
 ;; ido-mode is like magic pixie dust!
 (ido-mode t)
-(ido-ubiquitous t)
+(ido-ubiquitous-mode t)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
       ido-auto-merge-work-directories-length nil

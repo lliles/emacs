@@ -51,7 +51,7 @@
 (load "custom/js")
 (load "custom/hybris")
 (load "custom/slime")
-;;(load "custom/flyspell")
+(load "custom/flyspell")
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)

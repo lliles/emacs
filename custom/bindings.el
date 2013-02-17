@@ -2,7 +2,7 @@
 (global-set-key (kbd "C-c f") 'find-file-in-project)
 
 ;; You know, like Readline.
-(global-set-key (kbd "C-M-h") 'backward-kill-word)
+(global-set-key (kbd "A-<backspace>") 'backward-kill-word)
 
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
@@ -17,8 +17,8 @@
 (global-set-key (kbd "C-<f10>") 'menu-bar-mode)
 
 ;; Font size
-(define-key global-map (kbd "C-+") 'text-scale-increase)
-(define-key global-map (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
 
 ;; Use regex searches by default.
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
@@ -89,14 +89,8 @@
 
 ;; swap command/options keys in mac os x
 (when (eq system-type 'darwin) 
-  (setq mac-option-key-is-meta nil)
-  (setq mac-command-key-is-meta t)
   (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil))
+  (setq mac-option-modifier 'alt))
 
-;; remap C-w to backward-kill-word
-(global-set-key "\C-w" 'backward-kill-word)
-;; and consequently remap C-x C-k to kill-region since we clobbered
-;; that with backward-kill-word
-(global-set-key "\C-x\C-k" 'kill-region)
+
 

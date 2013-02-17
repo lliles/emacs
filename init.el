@@ -28,8 +28,7 @@
                                rainbow-mode
                                yaml-mode
                                haskell-mode
-                               nrepl
-                               ac-nrepl))
+                               nrepl))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/

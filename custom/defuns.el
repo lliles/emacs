@@ -184,3 +184,13 @@ fill-column to a really large number then calling `fill-region'."
   (replace-regexp "\\*\\*" "h3." nil (point-min) (point-max))
   (replace-regexp "\\*" "h2." nil (point-min) (point-max))
   (refill-paragraphs-to-be-one-line))
+
+(defun toggle-window-dedicated ()
+  "Toggle whether the current window is dedicated or not"
+  (interactive)
+  (message
+   (let (window (get-buffer-window (current-buffer)))
+     (if (window-dedicated-p window)
+         (progn (set-window-dedicated-p window nil) "Window '%s' is normal")
+       (progn (set-window-dedicated-p window 1) "Window '%s' is dedicated")))
+   (current-buffer)))

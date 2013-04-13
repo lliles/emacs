@@ -29,16 +29,16 @@
                                yaml-mode
                                haskell-mode
                                nrepl
-                               nrepl-ritz))
+                               nrepl-ritz
+                               yasnippet
+                               yasnippet-bundle
+                               mustache-mode))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
 (defvar vendor-install-list '(extraedit
                               misc-cmds
-                              ri
-                              save-frame-geometry
-                              yasnippet
-                              mustache-mode))
+                              save-frame-geometry))
 (load "custom/vendor")
 
 ;; load custom code

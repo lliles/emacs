@@ -35,6 +35,7 @@
       xterm-mouse-mode t
       save-place-file (concat user-emacs-directory "places")
       org-log-done t
+      org-src-fontify-natively t
       initial-scratch-message ""
       ;; scroll setting
       scroll-margin 2

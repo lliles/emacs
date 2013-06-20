@@ -31,7 +31,6 @@
                                nrepl
                                nrepl-ritz
                                yasnippet
-                               yasnippet-bundle
                                mustache-mode))
 (load "custom/package")
 

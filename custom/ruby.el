@@ -2,13 +2,13 @@
   '(progn
      ;; work around possible elpa bug
      (ignore-errors (require 'ruby-compilation))
-     (setq ruby-use-encoding-map nil)
-     (add-hook 'ruby-mode-hook 'inf-ruby-keys)
+     (setq ruby-use-encoding-map nil
+           ruby-deep-indent-paren nil)
+     (add-hook 'ruby-mode-hook 'enable-paredit-mode)
      (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
-     (define-key ruby-mode-map (kbd "C-M-h") 'backward-kill-word)
-     (define-key ruby-mode-map (kbd "C-c l") "lambda")))
+     (define-key ruby-mode-map (kbd "C-M-h") 'backward-kill-word)))
 
-(global-set-key (kbd "C-h r") 'ri)
+;;(global-set-key (kbd "C-h r") 'ri)
 
 ;; Rake files are ruby, too, as are gemspecs, rackup files, etc.
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
@@ -19,8 +19,9 @@
 (add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
-;; We never want to edit Rubinius bytecode
+;; We never want to edit Rubinius bytecode or MacRuby binaries
 (add-to-list 'completion-ignored-extensions ".rbc")
+(add-to-list 'completion-ignored-extensions ".rbo")
 
 ;;; Rake
 
@@ -32,7 +33,7 @@
   "Return a list of all the rake tasks defined in the current
 projects.  I know this is a hack to put all the logic in the
 exec-to-string command, but it works and seems fast"
-  (delq nil (mapcar '(lambda(line)
+  (delq nil (mapcar #'(lambda(line)
                        (if (string-match "rake \\([^ ]+\\)" line) (match-string 1 line)))
                     (split-string (shell-command-to-string "rake -T") "[\n]"))))
 
@@ -56,42 +57,42 @@ exec-to-string command, but it works and seems fast"
 
 ;;; Flymake
 
-(defun flymake-ruby-init ()
-  (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                     'flymake-create-temp-inplace))
-         (local-file (file-relative-name
-                      temp-file
-                      (file-name-directory buffer-file-name))))
-    ;; Invoke ruby with '-c' to get syntax checking
-    (list "ruby" (list "-c" local-file))))
+;; (defun flymake-ruby-init ()
+;;   (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                      'flymake-create-temp-inplace))
+;;          (local-file (file-relative-name
+;;                       temp-file
+;;                       (file-name-directory buffer-file-name))))
+;;     ;; Invoke ruby with '-c' to get syntax checking
+;;     (list "ruby" (list "-c" local-file))))
 
-(defun flymake-ruby-enable ()
-  (when (and buffer-file-name
-             (file-writable-p
-              (file-name-directory buffer-file-name))
-             (file-writable-p buffer-file-name)
-             (if (fboundp 'tramp-list-remote-buffers)
-                 (not (subsetp
-                       (list (current-buffer))
-                       (tramp-list-remote-buffers)))
-               t))
-    (local-set-key (kbd "C-c d")
-                   'flymake-display-err-menu-for-current-line)
-    (flymake-mode t)))
+;; (defun flymake-ruby-enable ()
+;;   (when (and buffer-file-name
+;;              (file-writable-p
+;;               (file-name-directory buffer-file-name))
+;;              (file-writable-p buffer-file-name)
+;;              (if (fboundp 'tramp-list-remote-buffers)
+;;                  (not (subsetp
+;;                        (list (current-buffer))
+;;                        (tramp-list-remote-buffers)))
+;;                t))
+;;     (local-set-key (kbd "C-c d")
+;;                    'flymake-display-err-menu-for-current-line)
+;;     (flymake-mode t)))
 
-(eval-after-load 'ruby-mode
-  '(progn
-     (require 'flymake)
-     (push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
-     (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
-     (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3)
-           flymake-err-line-patterns)
-     (add-hook 'ruby-mode-hook 'flymake-ruby-enable)))
+;; (eval-after-load 'ruby-mode
+;;   '(progn
+;;      (require 'flymake)
+;;      (push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
+;;      (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
+;;      (push '("^\\(.*\\):\\([0-9]+\\): \\(.*\\)$" 1 2 nil 3)
+;;            flymake-err-line-patterns)
+;;      (add-hook 'ruby-mode-hook 'flymake-ruby-enable)))
 
 ;; Rinari (Minor Mode for Ruby On Rails)
-(setq rinari-major-modes
-      (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
-            'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
+;; (setq rinari-major-modes
+;;       (list 'mumamo-after-change-major-mode-hook 'dired-mode-hook 'ruby-mode-hook
+;;             'css-mode-hook 'yaml-mode-hook 'javascript-mode-hook))
 
 ;; TODO: set up ri
 ;; TODO: electric

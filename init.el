@@ -28,16 +28,23 @@
                                rainbow-mode
                                yaml-mode
                                haskell-mode
+                               ac-nrepl
+                               melpa
                                nrepl
                                nrepl-ritz
                                yasnippet
-                               mustache-mode))
+                               mustache-mode
+                               css-mode
+                               rhtml-mode
+                               rvm))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
 (defvar vendor-install-list '(extraedit
                               misc-cmds
-                              save-frame-geometry))
+                              save-frame-geometry
+                              randomize-region
+                              arduino-mode))
 (load "custom/vendor")
 
 ;; load custom code
@@ -45,12 +52,14 @@
 (load "custom/defuns")
 (load "custom/bindings")
 (load "custom/aliases")
+(load "custom/hooks")
 (load "custom/registers")
 (load "custom/lisp")
 (load "custom/js")
 (load "custom/hybris")
 (load "custom/slime")
 (load "custom/flyspell")
+(load "custom/ruby")
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)

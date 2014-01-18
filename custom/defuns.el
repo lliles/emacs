@@ -9,7 +9,8 @@
 
 (defun local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t)
-  (auto-fill-mode t))
+  ;;(auto-fill-mode t)
+  )
 
 (defun turn-on-save-place-mode ()
   (require 'saveplace)
@@ -33,7 +34,7 @@
 (add-hook 'coding-hook 'local-column-number-mode)
 (add-hook 'coding-hook 'local-comment-auto-fill)
 (add-hook 'coding-hook 'turn-on-save-place-mode)
-(add-hook 'coding-hook 'pretty-lambdas)
+;;(add-hook 'coding-hook 'pretty-lambdas)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-idle-highlight-mode)
   

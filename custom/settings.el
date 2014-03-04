@@ -100,6 +100,7 @@
 ;; Don't clutter up directories with files~
 (setq backup-directory-alist `(("." . ,(expand-file-name
                                         (concat user-emacs-directory "backups")))))
+(setq tramp-backup-directory-alist backup-directory-alist)
 
 ;; Associate modes with file extensions
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))

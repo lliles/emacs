@@ -1,5 +1,6 @@
 (require 'package)
 (setq package-user-dir (concat user-emacs-directory "packages"))
+(setq package-enable-at-startup nil)
 
 ;; package sources
 (dolist 

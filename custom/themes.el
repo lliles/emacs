@@ -14,5 +14,6 @@
 
 ;; tomorrow-theme
 (add-to-list 'custom-theme-load-path (concat user-emacs-directory "themes/tomorrow-theme"))
-(load-theme 'tomorrow-night-bright t)
+(add-to-list 'load-path (concat user-emacs-directory "themes/tomorrow-theme"))
+(load-theme 'tomorrow-night t)
 

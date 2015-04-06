@@ -28,15 +28,13 @@
                                rainbow-mode
                                yaml-mode
                                haskell-mode
-                               ac-nrepl
-                               melpa
-                               nrepl
-                               nrepl-ritz
                                yasnippet
                                mustache-mode
                                css-mode
                                rhtml-mode
-                               rvm))
+                               rvm
+                               sql-indent
+                               sr-speedbar))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/

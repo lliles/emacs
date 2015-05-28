@@ -24,7 +24,6 @@
                                scala-mode
                                smex
                                ido-ubiquitous
-                               javadoc-help
                                rainbow-mode
                                yaml-mode
                                haskell-mode

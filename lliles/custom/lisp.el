@@ -54,12 +54,3 @@
                      (0 (progn (compose-region (match-beginning 1)
                                                (match-end 1) "ƒ")
                                nil))))))
-
-(eval-after-load 'slime
-  '(define-key slime-mode-map (kbd "C-c p")
-     'slime-pprint-eval-last-expression))
-
-(eval-after-load 'slime-repl
-  '(define-key slime-repl-mode-map (kbd "C-c p")
-     'slime-pprint-eval-last-expression))
-

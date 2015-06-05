@@ -1,5 +1,5 @@
 (require 'package)
-(setq package-user-dir (concat user-emacs-directory "packages"))
+(setq package-user-dir (concat user-emacs-directory "lliles/packages"))
 (setq package-enable-at-startup nil)
 
 ;; package sources
@@ -15,7 +15,7 @@
   (package-refresh-contents))
 
 (dolist (package package-install-list)
-  (let ((custom (concat user-emacs-directory "custom/" (symbol-name package))))
+  (let ((custom (concat user-emacs-directory "lliles/custom/" (symbol-name package))))
     (when (not (package-installed-p package))
       (package-install package))
     (load custom 'noerror)))

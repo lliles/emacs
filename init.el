@@ -3,8 +3,8 @@
 ;; and brighter; it simply makes everything else vanish."
 ;;            -Neal Stephenson, "In the Beginning was the Command Line"
 
-;; setup load path
-(add-to-list 'load-path user-emacs-directory)
+;; setup load path - everything custom in lliles subdirectory
+(add-to-list 'load-path (concat user-emacs-directory "lliles/"))
 
 ;; load themes early to avoid face snatching
 (load "custom/themes")

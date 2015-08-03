@@ -54,7 +54,6 @@
 (load "custom/lisp")
 (load "custom/js")
 (load "custom/hybris")
-(load "custom/slime")
 (load "custom/flyspell")
 (load "custom/ruby")
 

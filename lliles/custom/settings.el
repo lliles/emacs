@@ -11,17 +11,21 @@
 
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
 
+;; prefer utf-8
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
+
+;; for processing ansi escape sequences as colors
+;; for this to have any effect, this must be done
+;; (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 (ansi-color-for-comint-mode-on)
 
-(require 'uniquify) ;; for setting uniquify option below
 (setq visible-bell nil
-      ring-bell-function (lambda ()) ;; nil still rings, so no-op instead
-      column-number-mode t 
-      fringe-mode (cons 4 0)
-      echo-keystrokes 0.1
+      ring-bell-function 'ignore
+      column-number-mode t
+      echo-keystrokes .1
       font-lock-maximum-decoration t
       inhibit-startup-message t
       transient-mark-mode t
@@ -147,3 +151,4 @@
 
 ;; allow narrowing
 (put 'narrow-to-region 'disabled nil)
+

@@ -5,7 +5,7 @@
 ;; package sources
 (dolist 
   (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-            ("melpa"     . "http://melpa.milkbox.net/packages/")))
+            ("melpa"     . "http://melpa.org/packages/")))
   (add-to-list 'package-archives source t))
 
 (package-initialize)

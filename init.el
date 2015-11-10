@@ -9,31 +9,18 @@
 ;; load themes early to avoid face snatching
 (load "custom/themes")
 
-;; packages to load via elpa/marmalade (see custom/package.el)
+;; packages to load via marmalade, elpa (see custom/package.el)
 (defvar package-install-list '(idle-highlight-mode
-                               ruby-mode
-                               inf-ruby
                                find-file-in-project
                                magit
-                               gist
                                paredit
-                               htmlize
-                               http-twiddle
-                               ruby-electric
                                clojure-mode
-                               scala-mode
                                smex
                                ido-ubiquitous
                                rainbow-mode
-                               yaml-mode
-                               haskell-mode
                                yasnippet
-                               mustache-mode
                                css-mode
-                               rhtml-mode
-                               rvm
-                               sql-indent
-                               sr-speedbar))
+                               ))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
@@ -41,7 +28,7 @@
                               misc-cmds
                               save-frame-geometry
                               randomize-region
-                              arduino-mode))
+                              ))
 (load "custom/vendor")
 
 ;; load custom code

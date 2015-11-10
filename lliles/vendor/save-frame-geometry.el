@@ -19,7 +19,7 @@
        ";;; Last generated " (current-time-string) ".\n"
        "(setq initial-frame-alist\n"
        "      '((font . \"" frameg-font "\")\n"
-       (format "        (top . %d)\n" (max frameg-top 0))
+       (format "        (top . %d)\n" (max (eval frameg-top) 0))
        (format "        (left . %d)\n" (max frameg-left 0))
        (format "        (width . %d)\n" (max frameg-width 0))
        (format "        (height . %d)))\n" (max frameg-height 0)))

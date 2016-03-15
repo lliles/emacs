@@ -20,6 +20,7 @@
                                rainbow-mode
                                yasnippet
                                css-mode
+                               groovy-mode
                                ))
 (load "custom/package")
 

@@ -26,9 +26,3 @@
   (add-hook
    (intern (concat (symbol-name x) "-mode-hook")) 'run-coding-hook))
 
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("(\\(fn\\>\\)"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "ƒ")
-                               nil))))))

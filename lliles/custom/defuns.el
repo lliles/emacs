@@ -3,6 +3,7 @@
 ;; hook value will repeatedly add it since there's no way to ensure
 ;; that a lambda doesn't already exist in the list.
 
+;; setup run-coding-hook
 (defun local-column-number-mode ()
   (make-local-variable 'column-number-mode)
   (column-number-mode t))
@@ -15,47 +16,44 @@
   (require 'saveplace)
   (setq save-place t))
 
-(defun turn-on-idle-highlight-mode ()
-  (idle-highlight-mode t))
-
 (defun add-watchwords ()
   (font-lock-add-keywords
    nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
           1 font-lock-warning-face t))))
+
+(defun turn-on-idle-highlight-mode ()
+  (idle-highlight-mode t))
 
 (add-hook 'coding-hook 'local-column-number-mode)
 (add-hook 'coding-hook 'local-comment-auto-fill)
 (add-hook 'coding-hook 'turn-on-save-place-mode)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-idle-highlight-mode)
-  
+
 (defun run-coding-hook ()
   "Enable things that are convenient across all coding buffers."
   (run-hooks 'coding-hook))
 
-(defun turn-off-tool-bar ()
-  (tool-bar-mode -1))
+;; setup cleanup-buffer
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
 
 (defun untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))
 
-(defun turn-on-whitespace ()
-  (whitespace-mode t))
-
-(defun turn-on-paredit ()
-  (paredit-mode t))
-
-(defun indent-buffer ()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
+;; bound in bindings.el
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
   (indent-buffer)
   (untabify-buffer)
   (delete-trailing-whitespace))
+
+;; used in lisp.el
+(defun turn-on-paredit ()
+  (paredit-mode t))
 
 ;; Other
 (defun eval-and-replace ()
@@ -127,7 +125,7 @@ otherwise just the length is returned."
 
 (defun mark-buffer-as-rectangle ()
   "Puts mark at beginning of current buffer and moves point
-to the last line and column needed to capture all lines in 
+to the last line and column needed to capture all lines in
 the buffer as a rectangle. Appends spaces to the last line
 as needed to match the length of the longest line."
   (interactive)
@@ -145,9 +143,9 @@ don't delete it."
 
 (defun align-repeat (start end regexp)
   "Repeat alignment with respect to the given regular expression."
-    (interactive "r\nsAlign regexp: ")
-    (align-regexp start end 
-        (concat "\\(\\s-*\\)" regexp) 1 1 t))
+  (interactive "r\nsAlign regexp: ")
+  (align-regexp start end
+                (concat "\\(\\s-*\\)" regexp) 1 1 t))
 
 (defun unfill-paragraph ()
   "This command does the reverse of `fill-paragraph' by setting

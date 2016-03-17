@@ -300,9 +300,9 @@ names to which it refers are bound."
       (paren-face-mismatch (:foreground nil :background nil :inherit show-paren-mismatch))
       (paren-face-no-match (:foreground nil :background nil :inherit show-paren-mismatch))
 
-      ;; Parenthesis dimming (parenface)
-      (paren-face (:foreground ,comment :background nil))
-
+      ;; Parenthesis dimming (paren-face)
+      (parenthesis (:foreground ,comment :background nil))
+      
       (sh-heredoc (:foreground nil :inherit font-lock-string-face :weight normal))
       (sh-quoted-exec (:foreground nil :inherit font-lock-preprocessor-face))
       (slime-highlight-edits-face (:weight bold))

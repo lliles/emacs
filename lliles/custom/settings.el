@@ -68,6 +68,9 @@
 ;; Save a list of recent files visited.
 (recentf-mode 1)
 
+;; enable paren-face to dim parens
+(global-paren-face-mode 1)
+
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 

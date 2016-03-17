@@ -21,6 +21,7 @@
                                yasnippet
                                css-mode
                                groovy-mode
+                               paren-face
                                ))
 (load "custom/package")
 

@@ -9,19 +9,11 @@
 
 (defun local-comment-auto-fill ()
   (set (make-local-variable 'comment-auto-fill-only-comments) t)
-  ;;(auto-fill-mode t)
-  )
+  (auto-fill-mode t))
 
 (defun turn-on-save-place-mode ()
   (require 'saveplace)
   (setq save-place t))
-
-(defun pretty-lambdas ()
-  (font-lock-add-keywords
-   nil `(("(?\\(lambda\\>\\)"
-          (0 (progn (compose-region (match-beginning 1) (match-end 1)
-                                    ,(make-char 'greek-iso8859-7 107))
-                    nil))))))
 
 (defun turn-on-idle-highlight-mode ()
   (idle-highlight-mode t))
@@ -34,7 +26,6 @@
 (add-hook 'coding-hook 'local-column-number-mode)
 (add-hook 'coding-hook 'local-comment-auto-fill)
 (add-hook 'coding-hook 'turn-on-save-place-mode)
-;;(add-hook 'coding-hook 'pretty-lambdas)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-idle-highlight-mode)
   

@@ -123,22 +123,11 @@
     (add-to-list 'grep-find-ignored-files "target")
     (add-to-list 'grep-find-ignored-files "*.class")))
 
-;; Default to unified diffs
+;; default to unified diffs
 (setq diff-switches "-u -w"
       magit-diff-options "-w")
 
-;; Cosmetics
-(eval-after-load 'diff-mode
-  '(progn
-     (set-face-foreground 'diff-added "green4")
-     (set-face-foreground 'diff-removed "red3")))
-
-(eval-after-load 'magit
-  '(progn
-     (set-face-foreground 'magit-diff-add "green4")
-     (set-face-foreground 'magit-diff-del "red3")))
-
-;; Platform-specific stuff
+;; platform-specific stuff
 (when (eq system-type 'darwin)
   ;; Work around a bug on OS X where system-name is FQDN
   (setq system-name (car (split-string system-name "\\.")))

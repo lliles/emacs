@@ -315,7 +315,7 @@ names to which it refers are bound."
 
       (diff-added (:foreground ,green))
       (diff-changed (:foreground ,purple))
-      (diff-removed (:foreground ,orange))
+      (diff-removed (:foreground ,red))
       (diff-header (:foreground ,aqua :background nil))
       (diff-file-header (:foreground ,blue :background nil))
       (diff-hunk-header (:foreground ,purple))
@@ -324,7 +324,7 @@ names to which it refers are bound."
 
       (diff-hl-insert (:foreground ,green :background ,green))
       (diff-hl-change (:foreground ,blue :background ,blue))
-      (diff-hl-delete (:foreground ,orange :background ,orange))
+      (diff-hl-delete (:foreground ,red :background ,red))
       (diff-hl-unknown (:foreground ,purple :background ,purple))
 
       (ediff-even-diff-A (:foreground nil :background nil :inverse-video t))
@@ -388,7 +388,9 @@ names to which it refers are bound."
       (magit-log-date (:foreground ,blue))
 
       ;; TODO: magit-{reflog,rebase,sequence,diff,blame}-*
-
+      (magit-diff-add (:foreground ,green))
+      (magit-diff-del (:foreground ,red))
+      
       (magit-process-ok (:inherit success))
       (magit-process-ng (:inherit error))
       (magit-section-heading (:foreground ,yellow :weight bold))

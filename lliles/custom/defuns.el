@@ -25,7 +25,8 @@
   (idle-highlight-mode t))
 
 (add-hook 'coding-hook 'local-column-number-mode)
-(add-hook 'coding-hook 'local-comment-auto-fill)
+;; this is annoying when temporarily commenting code
+;;(add-hook 'coding-hook 'local-comment-auto-fill)
 (add-hook 'coding-hook 'turn-on-save-place-mode)
 (add-hook 'coding-hook 'add-watchwords)
 (add-hook 'coding-hook 'turn-on-idle-highlight-mode)

@@ -91,11 +91,6 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;(add-hook 'text-mode-hook 'turn-on-flyspell)
 
-(defalias 'yes-or-no-p 'y-or-n-p)
-(random t) ;; Seed the random-number generator
-
-(defalias 'auto-revert-tail-mode 'tail-mode)
-
 ;; Hippie expand: at times perhaps too hip
 (dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
   (delete f hippie-expand-try-functions-list))
@@ -143,3 +138,7 @@
 ;; allow narrowing
 (put 'narrow-to-region 'disabled nil)
 
+;; aliases
+(defalias 'rr 'replace-regexp)
+(defalias 'qrr 'query-replace-regexp)
+(defalias 'ttl 'toggle-truncate-lines)

@@ -1,9 +1,6 @@
 ;; It's all about the project.
 (global-set-key (kbd "C-c f") 'find-file-in-project)
 
-;; You know, like Readline.
-(global-set-key (kbd "A-<backspace>") 'backward-kill-word)
-
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
@@ -39,15 +36,6 @@
 (global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
 (global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
 
-;; Start eshell or switch to it if it's active.
-(global-set-key (kbd "C-x m") 'eshell)
-
-;; Start a new eshell even if one is active.
-(global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
-
-;; Start a regular shell if you prefer that.
-(global-set-key (kbd "C-x M-m") 'shell)
-
 ;; If you want to be able to M-x without meta (phones, etc)
 ;; (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 ;; use smex instead
@@ -69,24 +57,11 @@
 
 (global-set-key (kbd "C-c q") 'join-line)
 
-;; This is a little hacky since VC doesn't support git add internally
-(eval-after-load 'vc
-  (define-key vc-prefix-map "i"
-    '(lambda () (interactive)
-       (if (not (eq 'Git (vc-backend buffer-file-name)))
-           (vc-register)
-         (shell-command (format "git add %s" buffer-file-name))
-         (message "Staged changes.")))))
-
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o")
   (lambda () (interactive)
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
-
-;; Org
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
 
 ;; swap command/options keys in mac os x
 (when (eq system-type 'darwin) 

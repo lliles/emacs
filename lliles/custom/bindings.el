@@ -19,7 +19,7 @@
 
 ;; Use regex searches by default.
 (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "\C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
@@ -75,3 +75,5 @@
 (dolist (r `((?i (file . ,(concat user-emacs-directory "init.el")))))
   (set-register (car r) (cadr r)))
 
+;; enable avy
+(global-set-key (kbd "C-;") 'avy-goto-char-timer)

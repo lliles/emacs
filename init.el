@@ -22,7 +22,12 @@
                                css-mode
                                groovy-mode
                                paren-face
-                               ))
+                               company
+                               cider
+                               exec-path-from-shell
+                               avy
+                               swiper
+                               counsel))
 (load "custom/package")
 
 ;; load vendor lib from vendor/ and customizations from custom/
@@ -42,6 +47,7 @@
 (load "custom/hybris")
 (load "custom/flyspell")
 (load "custom/ruby")
+(load "custom/c")
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)

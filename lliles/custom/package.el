@@ -4,8 +4,8 @@
 
 ;; package sources
 (dolist 
-  (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-            ("melpa"     . "http://melpa.org/packages/")))
+  (source '(("marmalade" . "https://marmalade-repo.org/packages/")
+            ("melpa"     . "https://melpa.org/packages/")))
   (add-to-list 'package-archives source t))
 
 (package-initialize)

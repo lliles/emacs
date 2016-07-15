@@ -9,6 +9,10 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
+;; make sure exec-path and friends are correct
+(when (memq window-system '(ns))
+  (exec-path-from-shell-initialize))
+
 ;; prefer utf-8
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -139,6 +143,10 @@
 (put 'narrow-to-region 'disabled nil)
 
 ;; aliases
+(defalias 'yes-or-no-p 'y-or-n-p)
 (defalias 'rr 'replace-regexp)
 (defalias 'qrr 'query-replace-regexp)
 (defalias 'ttl 'toggle-truncate-lines)
+
+;; enable company mode everywhere
+(add-hook 'after-init-hook 'global-company-mode)

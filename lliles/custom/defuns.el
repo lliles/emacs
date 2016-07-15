@@ -52,10 +52,6 @@
   (untabify-buffer)
   (delete-trailing-whitespace))
 
-;; used in lisp.el
-(defun turn-on-paredit ()
-  (paredit-mode t))
-
 ;; Other
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."
@@ -67,11 +63,11 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
-(defun sudo-edit (&optional arg)
-  (interactive "p")
-  (if (or arg (not buffer-file-name))
-      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
-    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+;;(defun sudo-edit (&optional arg)
+;;  (interactive "p")
+;;  (if (or arg (not buffer-file-name))
+;;      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
+;;    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun lorem ()
   "Insert a lorem ipsum."
@@ -88,13 +84,6 @@
   "Insert a time-stamp according to locale's date and time format."
   (interactive)
   (insert (format-time-string "%c" (current-time))))
-
-(defun paredit-nonlisp ()
-  "Turn on paredit mode for non-lisps."
-  (interactive)
-  (set (make-local-variable 'paredit-space-for-delimiter-predicates)
-       '((lambda (endp delimiter) nil)))
-  (paredit-mode 1))
 
 (defun message-point ()
   (interactive)

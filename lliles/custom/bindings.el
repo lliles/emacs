@@ -1,6 +1,3 @@
-;; It's all about the project.
-(global-set-key (kbd "C-c f") 'find-file-in-project)
-
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
@@ -18,7 +15,7 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 
 ;; Use regex searches by default.
-(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+;;(global-set-key (kbd "C-s") 'isearch-forward-regexp)
 (global-set-key (kbd "C-r") 'isearch-backward-regexp)
 (global-set-key (kbd "C-M-s") 'isearch-forward)
 (global-set-key (kbd "C-M-r") 'isearch-backward)
@@ -27,7 +24,7 @@
 (global-set-key (kbd "C-x C-i") 'imenu)
 
 ;; File finding
-(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
+;;(global-set-key (kbd "C-x M-f") 'ido-find-file-other-window)
 (global-set-key (kbd "C-c y") 'bury-buffer)
 (global-set-key (kbd "C-c r") 'revert-buffer)
 
@@ -52,9 +49,6 @@
 ;; For debugging Emacs modes
 (global-set-key (kbd "C-c p") 'message-point)
 
-;; So good!
-(global-set-key (kbd "C-c g") 'magit-status)
-
 (global-set-key (kbd "C-c q") 'join-line)
 
 ;; Activate occur easily inside isearch
@@ -74,6 +68,3 @@
 
 (dolist (r `((?i (file . ,(concat user-emacs-directory "init.el")))))
   (set-register (car r) (cadr r)))
-
-;; enable avy
-(global-set-key (kbd "C-;") 'avy-goto-char-timer)

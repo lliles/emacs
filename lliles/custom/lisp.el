@@ -9,11 +9,6 @@
 
 (define-key emacs-lisp-mode-map (kbd "M-.") 'find-function-at-point)
 
-;;; Clojure
-
-(eval-after-load 'find-file-in-project
-  '(add-to-list 'ffip-patterns "*.clj"))
-
 ;;; Enhance Lisp Modes
 
 (dolist (x '(scheme emacs-lisp lisp clojure))

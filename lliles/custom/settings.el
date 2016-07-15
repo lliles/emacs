@@ -9,10 +9,6 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
-;; make sure exec-path and friends are correct
-(when (memq window-system '(ns))
-  (exec-path-from-shell-initialize))
-
 ;; prefer utf-8
 (prefer-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
@@ -70,23 +66,20 @@
 ;; Save a list of recent files visited.
 (recentf-mode 1)
 
-;; enable paren-face to dim parens
-(global-paren-face-mode 1)
-
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
 ;; ido-mode is like magic pixie dust!
-(ido-mode t)
-(ido-ubiquitous-mode t)
-(setq ido-enable-prefix nil
-      ido-enable-flex-matching t
-      ido-auto-merge-work-directories-length nil
-      ido-create-new-buffer 'always
-      ido-use-filename-at-point 'guess
-      ido-use-virtual-buffers t
-      ido-handle-duplicate-virtual-buffers 2
-      ido-max-prospects 10)
+;;(ido-mode t)
+;;(ido-ubiquitous-mode t)
+;;(setq ido-enable-prefix nil
+;;      ido-enable-flex-matching t
+;;      ido-auto-merge-work-directories-length nil
+;;      ido-create-new-buffer 'always
+;;      ido-use-filename-at-point 'guess
+;;      ido-use-virtual-buffers t
+;;      ido-handle-duplicate-virtual-buffers 2
+;;      ido-max-prospects 10)
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
@@ -109,7 +102,6 @@
 
 ;; Associate modes with file extensions
 (add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
-(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
@@ -124,8 +116,7 @@
     (add-to-list 'grep-find-ignored-files "*.class")))
 
 ;; default to unified diffs
-(setq diff-switches "-u -w"
-      magit-diff-options "-w")
+(setq diff-switches "-u -w")
 
 ;; platform-specific stuff
 (when (eq system-type 'darwin)
@@ -148,5 +139,3 @@
 (defalias 'qrr 'query-replace-regexp)
 (defalias 'ttl 'toggle-truncate-lines)
 
-;; enable company mode everywhere
-(add-hook 'after-init-hook 'global-company-mode)

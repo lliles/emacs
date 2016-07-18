@@ -12,6 +12,8 @@
   (set (make-local-variable 'comment-auto-fill-only-comments) t)
   (auto-fill-mode t))
 
+(setq save-place-file (concat user-emacs-directory "places"))
+
 (defun turn-on-save-place-mode ()
   (require 'saveplace)
   (setq save-place t))

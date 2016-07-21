@@ -29,7 +29,31 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-;; setup all the rest
+;; setup native emacs packages
+(use-package browse-url
+  :config
+  (when (eq system-type 'darwin)
+    (setq browse-url-browser-function 'browse-url-default-macosx-browser)))
+
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward))
+
+(use-package recentf
+  :config
+  (recentf-mode 1)
+  (setq recentf-max-saved-items 200
+        recentf-max-menu-items 15
+        recentf-auto-cleanup 300
+        recentf-exclude (list "/\\.git/.*\\'" ; Git contents
+                              "/lliles/packages/.*\\'" ; Package files
+                              )))
+
+(use-package paren
+  :config
+  (show-paren-mode 1))
+
+;; setup third-party packages
 (use-package idle-highlight-mode :ensure t)
 
 (use-package magit
@@ -102,30 +126,7 @@
   :bind (("C-x C-f" . counsel-find-file)
          ("C-x C-m" . counsel-M-x)))
 
-(use-package browse-url
-  :config
-  (when (eq system-type 'darwin)
-    (setq browse-url-browser-function 'browse-url-default-macosx-browser)))
-
-(use-package uniquify
-  :config (setq uniquify-buffer-name-style 'forward))
-
-(use-package recentf
-  :config
-  (recentf-mode 1)
-  (setq recentf-max-saved-items 200
-        recentf-max-menu-items 15
-        recentf-auto-cleanup 300
-        recentf-exclude (list "/\\.git/.*\\'" ; Git contents
-                              "/lliles/packages/.*\\'" ; Package files
-                              )))
-
-(use-package paren
-  :config
-  (show-paren-mode 1))
-
-
-;; setup stuff not found in repos
+;; setup local packages
 (use-package extraedit :load-path "lliles/vendor")
 (use-package misc-cmds :load-path "lliles/vendor")
 (use-package save-frame-geometry :load-path "lliles/vendor")

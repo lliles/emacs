@@ -24,10 +24,15 @@
 
 (package-initialize)
 
-;; setup use-package
+;; install use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+;; require use-package and friends
+(require 'use-package)
+(require 'diminish)
+(require 'bind-key)
 
 ;; setup native emacs packages
 (use-package browse-url
@@ -83,7 +88,7 @@
 
 (use-package css-mode
   :ensure t
-  :mode ("\\.css$"))
+  :mode "\\.css$")
 
 (use-package groovy-mode :ensure t)
 

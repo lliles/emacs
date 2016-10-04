@@ -206,15 +206,13 @@
 ;; transparently open compressed files
 (auto-compression-mode t)
 
-
 ;; load custom code
 (load "custom/settings")
 (load "custom/defuns")
 (load "custom/bindings")
-(load "custom/lisp")
+;;(load "custom/lisp")
 (load "custom/hybris")
-(load "custom/flyspell")
-(load "custom/ruby")
+;;(load "custom/ruby")
 (load "custom/c")
 
 ;; load system specific code

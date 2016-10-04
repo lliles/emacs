@@ -2,7 +2,7 @@
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
 ;; Completion that uses many different methods to find options.
-(global-set-key (kbd "M-/") 'hippie-expand)
+;;(global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; Perform general cleanup.
 (global-set-key (kbd "C-c n") 'cleanup-buffer)
@@ -16,9 +16,9 @@
 
 ;; Use regex searches by default.
 ;;(global-set-key (kbd "C-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-r") 'isearch-backward-regexp)
-(global-set-key (kbd "C-M-s") 'isearch-forward)
-(global-set-key (kbd "C-M-r") 'isearch-backward)
+;;(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+;;(global-set-key (kbd "C-M-s") 'isearch-forward)
+;;(global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; Jump to a definition in the current file. (This is awesome.)
 (global-set-key (kbd "C-x C-i") 'imenu)
@@ -30,8 +30,8 @@
 
 ;; Window switching. (C-x o goes to the next window)
 (windmove-default-keybindings) ;; Shift+direction
-(global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
-(global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
+;;(global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
+;;(global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
 
 ;; If you want to be able to M-x without meta (phones, etc)
 ;; (global-set-key (kbd "C-x C-m") 'execute-extended-command)
@@ -47,15 +47,15 @@
 (global-set-key (kbd "C-c e") 'eval-and-replace)
 
 ;; For debugging Emacs modes
-(global-set-key (kbd "C-c p") 'message-point)
+;;(global-set-key (kbd "C-c p") 'message-point)
 
-(global-set-key (kbd "C-c q") 'join-line)
+;;(global-set-key (kbd "C-c q") 'join-line)
 
 ;; Activate occur easily inside isearch
-(define-key isearch-mode-map (kbd "C-o")
-  (lambda () (interactive)
-    (let ((case-fold-search isearch-case-fold-search))
-      (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
+;; (define-key isearch-mode-map (kbd "C-o")
+;;   (lambda () (interactive)
+;;     (let ((case-fold-search isearch-case-fold-search))
+;;       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
 ;; swap command/options keys in mac os x
 (when (eq system-type 'darwin) 

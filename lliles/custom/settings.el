@@ -1,5 +1,4 @@
 
-
 ;; ido-mode is like magic pixie dust!
 ;;(ido-mode t)
 ;;(ido-ubiquitous-mode t)
@@ -17,14 +16,13 @@
 (set-default 'imenu-auto-rescan t)
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-;(add-hook 'text-mode-hook 'turn-on-flyspell)
 
 ;; Hippie expand: at times perhaps too hip
-(dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
-  (delete f hippie-expand-try-functions-list))
+;;(dolist (f '(try-expand-line try-expand-list try-complete-file-name-partially))
+;;  (delete f hippie-expand-try-functions-list))
 
 ;; Add this back in at the end of the list.
-(add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)
+;;(add-to-list 'hippie-expand-try-functions-list 'try-complete-file-name-partially t)
 
 ;; Don't clutter up directories with files~
 (setq backup-directory-alist `(("." . ,(expand-file-name
@@ -41,6 +39,7 @@
 (add-to-list 'auto-mode-alist '("\\.ru$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.xml$" . nxml-mode))
 
+;; grep mode ignores
 (eval-after-load 'grep
   '(when (boundp 'grep-find-ignored-files)
     (add-to-list 'grep-find-ignored-files "target")
@@ -48,7 +47,6 @@
 
 ;; default to unified diffs
 (setq diff-switches "-u -w")
-
 
 ;; make emacs use the clipboard
 (setq x-select-enable-clipboard t)

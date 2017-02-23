@@ -2,7 +2,7 @@
 ;; functions not go in hooks. 
 (defun turn-on-watchword-highlighting ()
   (font-lock-add-keywords
-   nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
+   nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\)\\>"
           1 font-lock-warning-face t))))
 
 (defun turn-on-idle-highlight-mode ()

@@ -7,7 +7,9 @@
 (add-to-list 'load-path (concat user-emacs-directory "lliles/"))
 (add-to-list 'load-path (concat user-emacs-directory "lliles/vendor"))
 
-;; TODO: is this still necessary?
+;; TODO reorganize settings to before packages
+
+;; TODO is this still necessary?
 ;; load themes early to avoid face snatching
 (load "custom/themes")
 
@@ -41,7 +43,10 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; setup native emacs packages
+;; setup native emacs packages - some settings need to be applied first
+;; don't clutter up directories with backup files~
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+
 (use-package browse-url
   :config
   (when (eq system-type 'darwin)
@@ -73,6 +78,13 @@
   :config
   (windmove-default-keybindings)) ;; shift+direction
 
+(use-package tramp
+  :config
+  (setq tramp-backup-directory-alist backup-directory-alist))
+
+(use-package hi-lock
+  :diminish hi-lock-mode)
+
 (use-package diff-mode
   :mode "COMMIT_EDITMSG$") ;; TODO replace with magit?
 
@@ -91,7 +103,7 @@
   (add-hook 'emacs-lisp-mode-hook 'turn-on-watchword-highlighting)
   (add-hook 'emacs-lisp-mode-hook 'turn-on-idle-highlight-mode)
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'emacs-lisp-mode-hook 'smartparens-mode))
+  (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
   
 ;; setup third-party packages
 (use-package idle-highlight-mode :ensure t)
@@ -118,9 +130,21 @@
   :config
   (require 'smartparens-config))
 
-(use-package clojure-mode :ensure t)
+(use-package clojure-mode
+  :ensure t
+  :config
+  (add-hook 'clojure-mode-hook 'eldoc-mode)
+  (add-hook 'clojure-mode-hook 'smartparens-strict-mode)
+  (add-hook 'clojure-mode-hook 'subword-mode))
 
-(use-package cider :ensure t)
+(use-package cider
+  :ensure t
+  :init
+  (setq cider-repl-history-file (concat user-emacs-directory "cider-repl-history"))
+  :config
+  (add-hook 'cider-repl-mode-hook 'eldoc-mode)
+  (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+  (add-hook 'cider-repl-mode-hook 'subword-mode))
 
 (use-package rainbow-mode :ensure t)
 
@@ -140,6 +164,9 @@
 
 (use-package company
   :ensure t
+  :diminish company-mode
+  :init
+  (setq company-tooltip-align-annotations t)
   :config
   ;; enable company mode everywhere
   (add-hook 'after-init-hook 'global-company-mode))
@@ -156,6 +183,7 @@
 
 (use-package ivy
   :ensure t
+  :diminish ivy-mode
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
@@ -201,10 +229,6 @@
       sql-mysql-options (list "-E")
       ;; don't pop a new frame for open file
       ns-pop-up-frames nil
-      ;; don't clutter up directories with backup files~
-      backup-directory-alist `(("." . ,(expand-file-name
-                                        (concat user-emacs-directory "backups"))))
-      tramp-backup-directory-alist backup-directory-alist
       ;; make emacs use the clipboard
       x-select-enable-clipboard t)
 
@@ -309,7 +333,8 @@
 (global-set-key (kbd "C-c r") 'revert-buffer)
 
 ;; Should be able to eval-and-replace anywhere.
-(global-set-key (kbd "C-c e") 'eval-and-replace)
+;; TODO is this hiding something?
+;;(global-set-key (kbd "C-c e") 'eval-and-replace)
 
 ;; For debugging Emacs modes
 ;;(global-set-key (kbd "C-c p") 'message-point)

@@ -1,41 +1,12 @@
-;; We have a number of turn-on-* functions since it's advised that lambda
-;; functions not go in hooks. Repeatedly evaling an add-to-list with a
-;; hook value will repeatedly add it since there's no way to ensure
-;; that a lambda doesn't already exist in the list.
-
-;; setup run-coding-hook
-(defun local-column-number-mode ()
-  (make-local-variable 'column-number-mode)
-  (column-number-mode t))
-
-(defun local-comment-auto-fill ()
-  (set (make-local-variable 'comment-auto-fill-only-comments) t)
-  (auto-fill-mode t))
-
-(setq save-place-file (concat user-emacs-directory "places"))
-
-(defun turn-on-save-place-mode ()
-  (require 'saveplace)
-  (setq save-place t))
-
-(defun add-watchwords ()
+;; We have a few turn-on-* functions since it's advised that lambda
+;; functions not go in hooks. 
+(defun turn-on-watchword-highlighting ()
   (font-lock-add-keywords
    nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\):"
           1 font-lock-warning-face t))))
 
 (defun turn-on-idle-highlight-mode ()
   (idle-highlight-mode t))
-
-(add-hook 'coding-hook 'local-column-number-mode)
-;; this is annoying when temporarily commenting code
-;;(add-hook 'coding-hook 'local-comment-auto-fill)
-(add-hook 'coding-hook 'turn-on-save-place-mode)
-(add-hook 'coding-hook 'add-watchwords)
-(add-hook 'coding-hook 'turn-on-idle-highlight-mode)
-
-(defun run-coding-hook ()
-  "Enable things that are convenient across all coding buffers."
-  (run-hooks 'coding-hook))
 
 ;; setup cleanup-buffer
 (defun indent-buffer ()
@@ -54,7 +25,34 @@
   (untabify-buffer)
   (delete-trailing-whitespace))
 
-;; Other
+;; hybris specific functions
+(defun y-impexinate-region (start end)
+  "Replaces beginning of line and all tab characters with semicolons in the region"
+  (interactive "r")
+  (save-restriction
+    (narrow-to-region start end)
+    (goto-char (point-min))
+    (while (re-search-forward "^" nil t)
+      (replace-match ";"))
+    (goto-char (point-min))
+    (while (re-search-forward "	" nil t)
+      (replace-match ";"))))
+
+(defun y-expand-impex (start end)
+  "Aligns the impex along semicolons"
+  (interactive "r")
+  (align-regexp start end "\\(\\s-*\\);" 1 1 t))
+
+(defun y-collapse-impex (start end)
+  "Collapse the impex - opposite of expand-impex"
+  (interactive "r")
+  (save-restriction
+    (narrow-to-region start end)
+    (goto-char (point-min))
+    (while (re-search-forward "\\s-*;" nil t)
+      (replace-match ";"))))
+
+;; miscellaneous functions
 (defun eval-and-replace ()
   "Replace the preceding sexp with its value."
   (interactive)
@@ -64,12 +62,6 @@
              (current-buffer))
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
-
-;;(defun sudo-edit (&optional arg)
-;;  (interactive "p")
-;;  (if (or arg (not buffer-file-name))
-;;      (find-file (concat "/sudo:root@localhost:" (ido-read-file-name "File: ")))
-;;    (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
 (defun lorem ()
   "Insert a lorem ipsum."
@@ -90,11 +82,6 @@
 (defun message-point ()
   (interactive)
   (message "%s" (point)))
-
-;; A monkeypatch to cause annotate to ignore whitespace
-(defun vc-git-annotate-command (file buf &optional rev)
-  (let ((name (file-relative-name file)))
-    (vc-git-command buf 0 name "blame" "-w" rev)))
 
 ;; custom functions
 (defun longest-line-length ()
@@ -159,14 +146,6 @@ fill-column to a really large number then calling `fill-region'."
   (let ((fill-column 100000))
     (fill-individual-paragraphs (point-min) (point-max))))
 
-(defun org-to-confluence ()
-  "change stars to headings and refill paragraphs"
-  (interactive)
-  (replace-regexp "\\*\\*\\*" "h4." nil (point-min) (point-max))
-  (replace-regexp "\\*\\*" "h3." nil (point-min) (point-max))
-  (replace-regexp "\\*" "h2." nil (point-min) (point-max))
-  (refill-paragraphs-to-be-one-line))
-
 (defun toggle-window-dedicated ()
   "Toggle whether the current window is dedicated or not"
   (interactive)
@@ -177,21 +156,22 @@ fill-column to a really large number then calling `fill-region'."
        (progn (set-window-dedicated-p window 1) "Window '%s' is dedicated")))
    (current-buffer)))
 
+;; TODO: need to pull these into init.el
 ;; default indentation to 4, but let SGML mode guess, too.
-(defun ll-sgml-mode-hook ()
-  (set (make-local-variable 'sgml-basic-offset) 4)
-  (sgml-guess-indent))
+;; (defun ll-sgml-mode-hook ()
+;;   (set (make-local-variable 'sgml-basic-offset) 4)
+;;   (sgml-guess-indent))
 
-(add-hook 'sgml-mode-hook 'll-sgml-mode-hook)
+;; (add-hook 'sgml-mode-hook 'll-sgml-mode-hook)
 
 ;; change isearch to stop at beginning of word
-(defun ll-goto-match-beginning ()
-  (when (and isearch-forward isearch-other-end (not isearch-mode-end-hook-quit))
-    (goto-char isearch-other-end)))
+;; (defun ll-goto-match-beginning ()
+;;   (when (and isearch-forward isearch-other-end (not isearch-mode-end-hook-quit))
+;;     (goto-char isearch-other-end)))
 
-(add-hook 'isearch-mode-end-hook 'll-goto-match-beginning)
+;; (add-hook 'isearch-mode-end-hook 'll-goto-match-beginning)
 
-(defadvice isearch-exit (after ll-goto-match-beginning activate)
-  "Go to beginning of match."
-  (when (and isearch-forward isearch-other-end)
-    (goto-char isearch-other-end)))
+;; (defadvice isearch-exit (after ll-goto-match-beginning activate)
+;;   "Go to beginning of match."
+;;   (when (and isearch-forward isearch-other-end)
+;;     (goto-char isearch-other-end)))

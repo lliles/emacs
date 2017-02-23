@@ -7,7 +7,7 @@
 (add-to-list 'load-path (concat user-emacs-directory "lliles/"))
 (add-to-list 'load-path (concat user-emacs-directory "lliles/vendor"))
 
-;; TODO is this still necessary?
+;; TODO: is this still necessary?
 ;; load themes early to avoid face snatching
 (load "custom/themes")
 
@@ -16,12 +16,19 @@
 (setq package-user-dir (concat user-emacs-directory "lliles/packages"))
 (setq package-enable-at-startup nil)
 
-;; package sources
-(dolist
-    (source '(("marmalade" . "https://marmalade-repo.org/packages/")
-              ("melpa"     . "https://melpa.org/packages/")))
-  (add-to-list 'package-archives source))
+;; package sources and priorities
+(setq package-archives
+      '(("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("gnu"          . "http://elpa.gnu.org/packages/")
+        ("melpa"        . "https://melpa.org/packages/")
+        ("marmalade"    . "https://marmalade-repo.org/packages/"))
+      package-archive-priorities
+      '(("melpa-stable" . 15)
+        ("gnu"          . 10)
+        ("melpa"        . 5)
+        ("marmalade"    . 0)))
 
+;; initialize package
 (package-initialize)
 
 ;; install use-package
@@ -50,7 +57,7 @@
   (setq recentf-max-saved-items 200
         recentf-max-menu-items 15
         recentf-auto-cleanup 300
-        recentf-exclude (list "/\\.git/.*\\'" ; Git contents
+        recentf-exclude (list "/\\.git/.*\\'"          ; Git contents
                               "/lliles/packages/.*\\'" ; Package files
                               )))
 
@@ -58,6 +65,34 @@
   :config
   (show-paren-mode 1))
 
+(use-package saveplace
+  :config
+  (save-place-mode 1))
+
+(use-package windmove
+  :config
+  (windmove-default-keybindings)) ;; shift+direction
+
+(use-package diff-mode
+  :mode "COMMIT_EDITMSG$") ;; TODO replace with magit?
+
+(use-package ruby-mode
+  :mode ("Rakefile$"
+         "Gemfiles$"
+         "Capfile$"
+         "Vagrantfile$"
+         "\\.rb$"
+         "\\.rake$"
+         "\\.ru$"
+         "\\.gemspec$"))
+
+(use-package elisp-mode
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-watchword-highlighting)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-idle-highlight-mode)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+  (add-hook 'emacs-lisp-mode-hook 'smartparens-mode))
+  
 ;; setup third-party packages
 (use-package idle-highlight-mode :ensure t)
 
@@ -77,6 +112,11 @@
     (set (make-local-variable 'paredit-space-for-delimiter-predicates)
          '((lambda (endp delimiter) nil)))
     (paredit-mode 1)))
+
+(use-package smartparens
+  :ensure t
+  :config
+  (require 'smartparens-config))
 
 (use-package clojure-mode :ensure t)
 
@@ -137,6 +177,8 @@
 (use-package save-frame-geometry :load-path "lliles/vendor")
 (use-package randomize-region :load-path "lliles/vendor")
 
+;; TODO review all of these - some probably have changed
+;; miscellaneous settings
 (setq visible-bell nil
       ring-bell-function 'ignore
       column-number-mode t
@@ -158,13 +200,35 @@
       ;; set mysql client output to vertical instead of table
       sql-mysql-options (list "-E")
       ;; don't pop a new frame for open file
-      ns-pop-up-frames nil)
+      ns-pop-up-frames nil
+      ;; don't clutter up directories with backup files~
+      backup-directory-alist `(("." . ,(expand-file-name
+                                        (concat user-emacs-directory "backups"))))
+      tramp-backup-directory-alist backup-directory-alist
+      ;; make emacs use the clipboard
+      x-select-enable-clipboard t)
 
+(set-default 'indent-tabs-mode nil)
+(set-default 'indicate-empty-lines t)
+(set-default 'imenu-auto-rescan t)
+
+;; aliases
+(defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'rr 'replace-regexp)
+(defalias 'qrr 'query-replace-regexp)
+(defalias 'ttl 'toggle-truncate-lines)
+
+;; don't wrap lines in partial or full windows
+(setq truncate-partial-width-windows t)
+(set-default 'truncate-lines t)
+
+;; allow narrowing
+(put 'narrow-to-region 'disabled nil)
 
 ;; turn off interfaces early in startup to avoid momentary display.
-;; menu bar is already visible on OX X, so keep it
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
+;; menu bar is already visible on OS X, so keep it
 (when (and (not (eq system-type 'darwin)) (fboundp 'menu-bar-mode))
   (menu-bar-mode -1))
 (when (fboundp 'scroll-bar-mode)
@@ -196,32 +260,88 @@
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 ;; for existing files - helper function to colorize
 (require 'ansi-color)
-(defun lliles-display-ansi-colors ()
+(defun ll-display-ansi-colors ()
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 
-;; don't wrap lines in partial or full windows
-(setq truncate-partial-width-windows t)
-(set-default 'truncate-lines t)
-
 ;; file local variables considered safe
 (add-to-list 'safe-local-variable-values '(lexical-binding . t))
-(add-to-list 'safe-local-variable-values '(whitespace-line-column . 80))
+(add-to-list 'safe-local-variable-values '(whitespace-line-column . 100))
 
 ;; transparently open compressed files
 (auto-compression-mode t)
 
+;; TODO love/hate auto-fill... need to look into alternatives
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;;; Enhance Lisp Modes
+;; (dolist (x '(scheme emacs-lisp lisp clojure))
+;;   (add-hook
+;;    (intern (concat (symbol-name x) "-mode-hook")) 'turn-on-paredit)
+;;   (add-hook
+;;    (intern (concat (symbol-name x) "-mode-hook")) 'run-coding-hook))
+
+;; c-mode setup
+;; change c-mode to use linux style
+(setq c-default-style '((java-mode . "java")
+                        (awk-mode . "awk")
+                        (other . "gnu"))) ;; or linux?
+
 ;; load custom code
-(load "custom/settings")
 (load "custom/defuns")
-(load "custom/bindings")
-;;(load "custom/lisp")
-(load "custom/hybris")
-;;(load "custom/ruby")
-(load "custom/c")
+
+;; global keybindings
+;; Align your code in a pretty way.
+(global-set-key (kbd "C-x \\") 'align-regexp)
+
+;; Perform general cleanup.
+(global-set-key (kbd "C-c n") 'cleanup-buffer)
+
+;; Font size
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+;; Jump to a definition in the current file. (This is awesome.)
+(global-set-key (kbd "C-x C-i") 'imenu)
+
+;; File finding
+(global-set-key (kbd "C-c y") 'bury-buffer)
+(global-set-key (kbd "C-c r") 'revert-buffer)
+
+;; Should be able to eval-and-replace anywhere.
+(global-set-key (kbd "C-c e") 'eval-and-replace)
+
+;; For debugging Emacs modes
+;;(global-set-key (kbd "C-c p") 'message-point)
+;;(global-set-key (kbd "C-c q") 'join-line)
+
+;; swap command/options keys in mac os x
+(when (eq system-type 'darwin) 
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'alt))
+
+;; Registers allow you to jump to a file or other location
+;; quickly. Use C-x r j followed by the letter of the register (i for
+;; init.el, r for this file) to jump to it.
+(dolist (r `((?i (file . ,(concat user-emacs-directory "init.el")))))
+  (set-register (car r) (cadr r)))
 
 ;; load system specific code
 (load (concat "custom/" system-name) 'noerror)
 
 ;; use this instance as a server
 (server-start)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (smartparens yasnippet use-package rainbow-mode paren-face paredit magit idle-highlight-mode groovy-mode exec-path-from-shell counsel company cider avy))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -85,6 +85,33 @@
 (use-package hi-lock
   :diminish hi-lock-mode)
 
+(use-package simple
+  :config
+  (setq column-number-mode t
+        transient-mark-mode t))
+
+(use-package font-lock
+  :config
+  (setq font-lock-maximum-decoration t))
+
+(use-package whitespace
+  :config
+  (setq whitespace-style '(face trailing lines-tail tabs)
+        whitespace-line-column 100))
+
+(use-package ns-win
+  :config
+  (setq ns-pop-up-frames nil)) ;; don't pop a new frame for open file
+
+(use-package org
+  :config
+  (setq org-log-done t
+        org-src-fontify-natively t))
+
+(use-package sql
+  :config
+  (setq sql-mysql-options (list "-E"))) 
+
 (use-package diff-mode
   :mode "COMMIT_EDITMSG$") ;; TODO replace with magit?
 
@@ -104,7 +131,13 @@
   (add-hook 'emacs-lisp-mode-hook 'turn-on-idle-highlight-mode)
   (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
   (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
-  
+
+(use-package cc-mode
+  :config
+  (setq c-default-style '((java-mode . "java")
+                          (awk-mode . "awk")
+                          (other . "gnu")))) ;; or linux?
+
 ;; setup third-party packages
 (use-package idle-highlight-mode :ensure t)
 
@@ -209,32 +242,22 @@
 ;; miscellaneous settings
 (setq visible-bell nil
       ring-bell-function 'ignore
-      column-number-mode t
       echo-keystrokes .1
-      font-lock-maximum-decoration t
       inhibit-startup-message t
-      transient-mark-mode t
       require-final-newline t
-      whitespace-style '(face trailing lines-tail tabs)
-      whitespace-line-column 100
-      xterm-mouse-mode t
-      org-log-done t
-      org-src-fontify-natively t
       initial-scratch-message ""
       ;; scroll setting
       scroll-margin 2
       scroll-conservatively 2
-      scroll-preserve-screen-position 1
-      ;; set mysql client output to vertical instead of table
-      sql-mysql-options (list "-E")
-      ;; don't pop a new frame for open file
-      ns-pop-up-frames nil
-      ;; make emacs use the clipboard
-      x-select-enable-clipboard t)
+      scroll-preserve-screen-position 1)
 
 (set-default 'indent-tabs-mode nil)
 (set-default 'indicate-empty-lines t)
 (set-default 'imenu-auto-rescan t)
+
+;; file local variables considered safe
+(add-to-list 'safe-local-variable-values '(lexical-binding . t))
+(add-to-list 'safe-local-variable-values '(whitespace-line-column . 100))
 
 ;; aliases
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -265,6 +288,9 @@
   (mouse-wheel-mode t)
   (blink-cursor-mode -1))
 
+;; enable xterm mouse mode
+(xterm-mouse-mode)
+
 ;; settings for OS X
 (when (eq system-type 'darwin)
   (set-default-font "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
@@ -288,28 +314,11 @@
   (interactive)
   (ansi-color-apply-on-region (point-min) (point-max)))
 
-;; file local variables considered safe
-(add-to-list 'safe-local-variable-values '(lexical-binding . t))
-(add-to-list 'safe-local-variable-values '(whitespace-line-column . 100))
-
 ;; transparently open compressed files
 (auto-compression-mode t)
 
 ;; TODO love/hate auto-fill... need to look into alternatives
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;;; Enhance Lisp Modes
-;; (dolist (x '(scheme emacs-lisp lisp clojure))
-;;   (add-hook
-;;    (intern (concat (symbol-name x) "-mode-hook")) 'turn-on-paredit)
-;;   (add-hook
-;;    (intern (concat (symbol-name x) "-mode-hook")) 'run-coding-hook))
-
-;; c-mode setup
-;; change c-mode to use linux style
-(setq c-default-style '((java-mode . "java")
-                        (awk-mode . "awk")
-                        (other . "gnu"))) ;; or linux?
 
 ;; load custom code
 (load "custom/defuns")

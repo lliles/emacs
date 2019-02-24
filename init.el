@@ -22,13 +22,11 @@
 (setq package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
         ("gnu"          . "http://elpa.gnu.org/packages/")
-        ("melpa"        . "https://melpa.org/packages/")
-        ("marmalade"    . "https://marmalade-repo.org/packages/"))
+        ("melpa"        . "https://melpa.org/packages/"))
       package-archive-priorities
       '(("melpa-stable" . 15)
         ("gnu"          . 10)
-        ("melpa"        . 5)
-        ("marmalade"    . 0)))
+        ("melpa"        . 5)))
 
 ;; initialize package
 (package-initialize)
@@ -36,7 +34,8 @@
 ;; install use-package
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (package-install 'diminish))
 
 ;; require use-package and friends
 (require 'use-package)

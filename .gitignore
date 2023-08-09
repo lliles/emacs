@@ -16,3 +16,5 @@ nrepl-history
 recentf
 ido.last
 cider-repl-history
+transient
+org-persist

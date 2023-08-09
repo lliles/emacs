@@ -31,10 +31,13 @@
 ;; initialize package
 (package-initialize)
 
-;; install use-package
+;; install use-package and diminish
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
-  (package-install 'use-package)
+  (package-install 'use-package))
+
+(unless (package-installed-p 'diminish)
+  (package-refresh-contents)
   (package-install 'diminish))
 
 ;; require use-package and friends
@@ -128,8 +131,7 @@
   :config
   (add-hook 'emacs-lisp-mode-hook 'turn-on-watchword-highlighting)
   (add-hook 'emacs-lisp-mode-hook 'turn-on-idle-highlight-mode)
-  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-  (add-hook 'emacs-lisp-mode-hook 'smartparens-strict-mode))
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode))
 
 (use-package cc-mode
   :config
@@ -292,7 +294,6 @@
 
 ;; settings for OS X
 (when (eq system-type 'darwin)
-  (set-default-font "-apple-Menlo-medium-normal-normal-*-13-*-*-*-m-0-iso10646-1")
   (set-face-attribute 'default nil :height 110)
   (setq mouse-wheel-scroll-amount '(0.01)))
 
@@ -370,13 +371,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (smartparens yasnippet use-package rainbow-mode paren-face paredit magit idle-highlight-mode groovy-mode exec-path-from-shell counsel company cider avy))))
+   '(smartparens yasnippet use-package rainbow-mode paren-face paredit magit idle-highlight-mode groovy-mode exec-path-from-shell counsel company cider avy)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight regular :height 120 :width normal)))))
+
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
